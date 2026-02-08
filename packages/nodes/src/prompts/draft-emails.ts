@@ -66,7 +66,8 @@ ${signatureInstruction}`;
  * Build the subject line generation prompt.
  */
 export function buildSubjectPrompt(contact: Contact, emailBody: string): string {
-  const companyShort = (contact.company.split(' ')[0] ?? contact.company).toLowerCase();
+  const company = contact.company || 'company';
+  const companyShort = (company.split(' ')[0] ?? company).toLowerCase();
 
   return `Write a subject line for this cold email.
 
