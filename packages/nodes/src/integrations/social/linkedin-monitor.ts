@@ -170,7 +170,8 @@ export const linkedinMonitorNode = defineNode({
         authorName: post.authorName,
         authorHandle: extractHandleFromUrl(post.authorUrl),
         authorUrl: post.authorUrl || '',
-        authorFollowers: post.likes || 0,
+        // ForumScout may not always return follower data
+        authorFollowers: post.authorFollowers || 0,
         authorHeadline: post.authorHeadline,
         engagement: {
           likes: post.likes || 0,

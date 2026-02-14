@@ -113,6 +113,7 @@ export interface LinkedInPost {
   authorName: string;
   authorHeadline?: string;
   authorUrl?: string;
+  authorFollowers?: number;
   likes: number;
   comments: number;
   shares?: number;
