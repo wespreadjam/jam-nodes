@@ -16,6 +16,8 @@ interface Props {
   onZoomOut: () => void;
   onFitView: () => void;
   onRun?: () => void;
+  onStop?: () => void;
+  isRunning?: boolean;
 }
 
 export function WorkflowToolbar(props: Props) {
@@ -59,7 +61,33 @@ export function WorkflowToolbar(props: Props) {
         placeholder="Workflow name"
       />
       <div style={s.toolbarSep} />
-      {props.onRun && btn('run', '▶ Run', props.onRun)}
+      {props.isRunning && props.onStop ? (
+        <button
+          style={{
+            ...s.toolbarBtn,
+            background: '#f8717120',
+            color: '#f87171',
+            border: '1px solid #f8717140',
+            ...(hovered === 'stop' ? { background: '#f8717130' } : {}),
+          }}
+          onClick={props.onStop}
+          onMouseEnter={() => setHovered('stop')}
+          onMouseLeave={() => setHovered(null)}
+        >⏹ Stop</button>
+      ) : props.onRun ? (
+        <button
+          style={{
+            ...s.toolbarBtn,
+            background: '#4ade8020',
+            color: '#4ade80',
+            border: '1px solid #4ade8040',
+            ...(hovered === 'run' ? { background: '#4ade8030' } : {}),
+          }}
+          onClick={props.onRun}
+          onMouseEnter={() => setHovered('run')}
+          onMouseLeave={() => setHovered(null)}
+        >▶ Run</button>
+      ) : null}
       {btn('export', '↓ Export', props.onExport)}
       {btn('import', '↑ Import', handleImport)}
       <input ref={fileRef} type="file" accept=".json" onChange={handleFile} style={{ display: 'none' }} />

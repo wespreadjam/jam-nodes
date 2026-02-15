@@ -35,6 +35,12 @@ export const CSS_OVERRIDES = `
   .react-flow__attribution { display: none !important; }
   @keyframes dashmove { to { stroke-dashoffset: -10; } }
 
+  /* Node execution status animations */
+  @keyframes jam-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+  @keyframes jam-spin { to { transform: rotate(360deg); } }
+  .jam-node-running { animation: jam-pulse 1.2s ease-in-out infinite; }
+  .jam-node-spinner { animation: jam-spin 1s linear infinite; display: inline-block; }
+
   /* Palette item hover */
   .palette-item { transition: background 0.15s, border-left 0.15s; border-left: 2px solid transparent; }
   .palette-item:hover { background: #1a1a2e; }

@@ -7,3 +7,6 @@ export { CustomNode } from './CustomNode';
 export { ZodSchemaIntrospector, introspectSchema } from './ZodSchemaIntrospector';
 export type { WorkflowJSON, WorkflowNodeJSON, WorkflowEdgeJSON, SchemaFieldInfo } from './types';
 export type { CustomNodeData } from './CustomNode';
+export { WorkflowRunner } from './WorkflowRunner';
+export { ExecutionResultPanel } from './ExecutionResultPanel';
+export type { NodeStatus, RunResult, StatusCallback, WorkflowRunnerOptions } from './WorkflowRunner';
