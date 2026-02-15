@@ -138,6 +138,14 @@ ctx.interpolate('{{items}}'); // [1, 2, 3]
 ctx.evaluateJsonPath('$.user.email'); // "alice@example.com"
 ```
 
+## Documentation
+
+- **[Overview](./docs/README.md)** — Architecture, quick start, and doc index
+- **[Core Framework Reference](./docs/CORE.md)** — Types, NodeRegistry, ExecutionContext, defineNode
+- **[Built-in Nodes Reference](./docs/NODES.md)** — Every node with full input/output schemas
+- **[Visual Editor Reference](./docs/EDITOR.md)** — WorkflowEditor, WorkflowRunner, JSON format
+- **[Creating Custom Nodes](./docs/CREATING-NODES.md)** — Step-by-step guide
+
 ## License
 
 MIT
