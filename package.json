@@ -11,7 +11,8 @@
     "test": "tsx test.ts",
     "lint": "npm run lint --workspaces --if-present",
     "clean": "npm run clean --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "editor": "cd packages/editor && npm run dev"
   },
   "repository": {
     "type": "git",
