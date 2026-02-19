@@ -4,7 +4,7 @@
  */
 
 import { NodeRegistry, ExecutionContext, defineNode } from './packages/core/src/index';
-import { conditionalNode, endNode, delayNode, mapNode, filterNode, httpRequestNode, builtInNodes } from './packages/nodes/src/index';
+import { conditionalNode, endNode, delayNode, mapNode, filterNode, httpRequestNode, breadNode, builtInNodes } from './packages/nodes/src/index';
 import { z } from 'zod';
 
 async function test() {
@@ -99,6 +99,11 @@ async function test() {
   const greetExecutor = registry.getExecutor('greet')!;
   const greetResult = await greetExecutor({ name: 'World' }, nodeCtx);
   console.log(`✓ Custom node: ${greetResult.output?.message}`);
+
+  // Test 8: Execute bread node
+  const breadExecutor = registry.getExecutor('bread')!;
+  const breadResult = await breadExecutor({}, nodeCtx);
+  console.log(`✓ Bread node: ${breadResult.output?.message}`);
 
   console.log('\n=== All tests passed! ===');
 }
