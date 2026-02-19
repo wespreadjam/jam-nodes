@@ -24,3 +24,8 @@ coverage/
 # Temp files
 *.tmp
 *.temp
+
+# Nix/direnv
+.direnv/
+result
+
