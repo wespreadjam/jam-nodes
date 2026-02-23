@@ -10,4 +10,16 @@
 | #1340 | 5:50 PM | ✅ | Version Bump to 0.2.0 for @jam-nodes/nodes Package | ~263 |
 | #1293 | 5:12 PM | 🔵 | Nodes package configuration with subpath exports examined | ~462 |
 | #1210 | 4:24 PM | 🟣 | Created @jam-nodes/nodes Package Configuration | ~428 |
+
+### Feb 8, 2026
+
+| ID | Time | T | Title | Read |
+|----|------|---|-------|------|
+| #1563 | 12:06 AM | 🔵 | Jam Nodes Package Structure Includes Prompts and Schemas Directories | ~516 |
+
+### Feb 22, 2026
+
+| ID | Time | T | Title | Read |
+|----|------|---|-------|------|
+| #2593 | 3:35 PM | 🔵 | Nodes Package with Granular Subpath Exports | ~433 |
 </claude-mem-context>

@@ -7,6 +7,7 @@
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
+| #1485 | 6:25 PM | 🔵 | Complete Node Package Exports Include AI Category with Three Claude-Powered Nodes | ~562 |
 | #1456 | 6:17 PM | 🔵 | Nodes package exports 18 built-in workflow nodes across five categories | ~553 |
 | #1391 | 6:04 PM | 🟣 | Added AI and SEO Audit Nodes to jam-nodes Built-in Collection | ~477 |
 | #1390 | 6:03 PM | 🟣 | Expanded Node Library with SEO Audit and AI-Powered Nodes | ~504 |
@@ -18,4 +19,17 @@
 | #1337 | " | 🔵 | Package index exports structure examined | ~458 |
 | #1232 | 4:28 PM | 🟣 | Committed jam-nodes open-source framework with core types and example node implementations | ~557 |
 | #1230 | 4:26 PM | 🟣 | Jam-Nodes Repository Initial Structure Staged | ~512 |
+
+### Feb 8, 2026
+
+| ID | Time | T | Title | Read |
+|----|------|---|-------|------|
+| #1573 | 12:56 AM | 🔵 | Verified jam-nodes package now exports domain-specific nodes | ~392 |
+
+### Feb 22, 2026
+
+| ID | Time | T | Title | Read |
+|----|------|---|-------|------|
+| #2632 | 4:03 PM | 🔵 | Current Jam-Nodes Package Inventory Revealed | ~549 |
+| #2558 | 3:27 PM | 🔵 | Examined main export file for packages/nodes module | ~332 |
 </claude-mem-context>
