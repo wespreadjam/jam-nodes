@@ -28,11 +28,15 @@ export type {
 export {
   mapNode,
   filterNode,
+  sortNode,
   MapInputSchema,
   MapOutputSchema,
   FilterInputSchema,
   FilterOutputSchema,
   FilterOperatorSchema,
+  SortInputSchema,
+  SortOutputSchema,
+  SortDirectionSchema,
 } from './transform/index.js';
 
 export type {
@@ -41,6 +45,9 @@ export type {
   FilterInput,
   FilterOutput,
   FilterOperator,
+  SortInput,
+  SortOutput,
+  SortDirection,
 } from './transform/index.js';
 
 // Example nodes
@@ -139,8 +146,7 @@ export type {
 import { conditionalNode } from './logic/index.js';
 import { endNode } from './logic/index.js';
 import { delayNode } from './logic/index.js';
-import { mapNode } from './transform/index.js';
-import { filterNode } from './transform/index.js';
+import { mapNode, filterNode, sortNode } from './transform/index.js';
 import { httpRequestNode } from './examples/index.js';
 import {
   redditMonitorNode,
@@ -168,6 +174,7 @@ export const builtInNodes = [
   // Transform
   mapNode,
   filterNode,
+  sortNode,
   // Examples
   httpRequestNode,
   // Integrations

@@ -4,7 +4,7 @@
  */
 
 import { NodeRegistry, ExecutionContext, defineNode } from './packages/core/src/index';
-import { conditionalNode, endNode, delayNode, mapNode, filterNode, httpRequestNode, builtInNodes } from './packages/nodes/src/index';
+import { conditionalNode, endNode, delayNode, mapNode, filterNode, sortNode, httpRequestNode, builtInNodes } from './packages/nodes/src/index';
 import { z } from 'zod';
 
 async function test() {
@@ -73,7 +73,18 @@ async function test() {
   );
   console.log(`✓ Conditional node: success=${conditionalResult.success}, nextNodeId=${conditionalResult.nextNodeId}`);
 
-  // Test 5: Execute map node
+  // Test 5: Execute sort node
+  const sortResult = await sortNode.executor(
+    {
+      items: [{ x: 3 }, { x: 1 }, { x: 2 }],
+      path: 'x',
+      direction: 'asc',
+    },
+    nodeCtx
+  );
+  console.log(`✓ Sort node: ${sortResult.output?.count} items, first=${JSON.stringify((sortResult.output?.results as unknown[])?.[0])}`);
+
+  // Test 6: Execute map node
   const mapResult = await mapNode.executor(
     {
       items: ctx.getVariable('contacts') as unknown[],
@@ -83,7 +94,7 @@ async function test() {
   );
   console.log(`✓ Map node: extracted ${mapResult.output?.count} emails: ${JSON.stringify(mapResult.output?.results)}`);
 
-  // Test 6: Execute filter node
+  // Test 7: Execute filter node
   const filterResult = await filterNode.executor(
     {
       items: [1, 2, 3, 4, 5],
@@ -95,7 +106,7 @@ async function test() {
   );
   console.log(`✓ Filter node: filtered to ${filterResult.output?.count} items: ${JSON.stringify(filterResult.output?.results)}`);
 
-  // Test 7: Execute custom greet node
+  // Test 8: Execute custom greet node
   const greetExecutor = registry.getExecutor('greet')!;
   const greetResult = await greetExecutor({ name: 'World' }, nodeCtx);
   console.log(`✓ Custom node: ${greetResult.output?.message}`);
