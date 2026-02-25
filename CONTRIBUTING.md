@@ -175,25 +175,22 @@ export const hunterDomainSearchNode = defineNode({
   inputSchema: HunterDomainSearchInputSchema,
   outputSchema: HunterDomainSearchOutputSchema,
 
-  // Declare required credentials
-  requiredCredentials: ['hunter'],
-
   async executor(input: HunterDomainSearchInput, context): Promise<{
     success: boolean;
     output?: HunterDomainSearchOutput;
     error?: string;
   }> {
     try {
-      // Get credentials from context
-      const credentials = await context.getCredentials?.('hunter');
-      if (!credentials?.apiKey) {
+      // Get credentials from injected services
+      const hunter = context.services?.hunter;
+      if (!hunter?.apiKey) {
         return { success: false, error: 'Hunter API credentials not configured' };
       }
 
       // Build query parameters
       const params = new URLSearchParams({
         domain: input.domain,
-        api_key: credentials.apiKey as string,
+        api_key: hunter.apiKey,
         limit: String(input.limit ?? 10),
       });
 
