@@ -1,5 +1,6 @@
 import { JSONPath } from 'jsonpath-plus';
 import type { NodeExecutionContext } from '../types/index.js';
+import type { NodeServices } from '../types/index.js';
 
 /**
  * Manages workflow variables and provides utilities for:
@@ -171,9 +172,20 @@ export class ExecutionContext {
   }
 
   /**
-   * Resolve nested path like "contact.email" or "data[0].name"
+   * Resolve nested path like "contact.email", "data[0].name", or "[0].email"
+   *
+   * Supported syntax:
+   * - Dot notation: "contact.email"
+   * - Keyed array access: "contacts[0].name"
+   * - Standalone array index: "[0].name" (when current value is an array)
+   * - Empty path returns the root variables object
    */
   resolveNestedPath(path: string): unknown {
+    // Empty path returns all variables
+    if (!path) {
+      return this.variables;
+    }
+
     const parts = path.split('.');
     let current: unknown = this.variables;
 
@@ -182,19 +194,31 @@ export class ExecutionContext {
         return undefined;
       }
 
-      // Handle array access like "contacts[0]"
-      const arrayMatch = part.match(/^(\w+)\[(\d+)\]$/);
-      if (arrayMatch) {
-        const [, key, index] = arrayMatch;
+      // Handle keyed array access like "contacts[0]"
+      const keyedArrayMatch = part.match(/^(\w+)\[(\d+)\]$/);
+      if (keyedArrayMatch) {
+        const [, key, index] = keyedArrayMatch;
         current = (current as Record<string, unknown>)[key!];
         if (Array.isArray(current)) {
           current = current[parseInt(index!, 10)];
         } else {
           return undefined;
         }
-      } else {
-        current = (current as Record<string, unknown>)[part];
+        continue;
       }
+
+      // Handle standalone array index like "[0]"
+      const standaloneIndexMatch = part.match(/^\[(\d+)\]$/);
+      if (standaloneIndexMatch) {
+        if (Array.isArray(current)) {
+          current = current[parseInt(standaloneIndexMatch[1]!, 10)];
+        } else {
+          return undefined;
+        }
+        continue;
+      }
+
+      current = (current as Record<string, unknown>)[part];
     }
 
     return current;
@@ -257,19 +281,35 @@ export class ExecutionContext {
   }
 
   /**
-   * Create a NodeExecutionContext for use with executors
+   * Create a NodeExecutionContext for use with executors.
+   *
+   * Supports two call signatures for backward compatibility:
+   * - `toNodeContext(userId, workflowId, campaignId?)` — legacy
+   * - `toNodeContext(userId, workflowId, { campaignId?, services? })` — preferred
+   *
+   * @param userId - User ID executing the workflow
+   * @param workflowExecutionId - Unique workflow execution identifier
+   * @param optionsOrCampaignId - Either an options object or a campaignId string (legacy)
    */
   toNodeContext(
     userId: string,
     workflowExecutionId: string,
-    campaignId?: string
+    optionsOrCampaignId?: string | {
+      campaignId?: string;
+      services?: NodeServices;
+    }
   ): NodeExecutionContext {
+    const resolved = typeof optionsOrCampaignId === 'string'
+      ? { campaignId: optionsOrCampaignId }
+      : optionsOrCampaignId;
+
     return {
       userId,
       workflowExecutionId,
-      campaignId,
+      campaignId: resolved?.campaignId,
       variables: this.getAllVariables(),
       resolveNestedPath: this.resolveNestedPath.bind(this),
+      services: resolved?.services,
     };
   }
 
