@@ -28,6 +28,7 @@ export type {
   FirecrawlClient,
   FirecrawlScrapeResult,
   FirecrawlCrawlResult,
+  FirecrawlExtractResult,
   NotificationService,
   StorageService,
   CacheService,

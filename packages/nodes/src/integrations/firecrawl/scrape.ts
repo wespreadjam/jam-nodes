@@ -295,6 +295,7 @@ export const firecrawlScrapeNode = defineNode({
 
   executor: async (input, context) => {
     try {
+      // Check for Bearer Token
       const bearerToken = context.credentials?.firecrawl?.bearerToken;
       if (!bearerToken) {
         return {
@@ -303,6 +304,7 @@ export const firecrawlScrapeNode = defineNode({
         };
       }
 
+      // Scrape URL
       const result = await scrapePage(bearerToken, {
         url: input.url,
         formats: input.formats,

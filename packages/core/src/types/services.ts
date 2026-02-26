@@ -140,6 +140,12 @@ export interface FirecrawlClient {
     maxDiscoveryDepth?: number;
     limit?: number;
   }): Promise<FirecrawlCrawlResult>;
+
+  extract(params: {
+    urls: string[];
+    prompt?: string;
+    schema?: Record<string, unknown>;
+  }): Promise<FirecrawlExtractResult>;
 }
 
 export interface FirecrawlScrapeResult {
@@ -205,6 +211,14 @@ export interface FirecrawlCrawlResult {
       [key: string]: unknown; // Any other metadata scraped
     };
   }>;
+}
+
+export interface FirecrawlExtractResult {
+  success: boolean;
+  status: 'completed' | 'failed' | 'cancelled';
+  data: Record<string, unknown>;
+  tokensUsed?: number;
+  expiresAt?: string;
 }
 
 /**

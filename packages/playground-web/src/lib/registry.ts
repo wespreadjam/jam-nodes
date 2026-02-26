@@ -76,6 +76,7 @@ export const NODE_SERVICE_REQUIREMENTS: Record<string, string[]> = {
   discord_create_thread: ['discordBot'],
   firecrawl_scrape: ['firecrawl'],
   firecrawl_crawl: ['firecrawl'],
+  firecrawl_extract: ['firecrawl'],
 };
 
 /**
