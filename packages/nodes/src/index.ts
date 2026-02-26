@@ -103,6 +103,9 @@ export {
   firecrawlCrawlNode,
   FirecrawlCrawlInputSchema,
   FirecrawlCrawlOutputSchema,
+  firecrawlExtractNode,
+  FirecrawlExtractInputSchema,
+  FirecrawlExtractOutputSchema,
 } from './integrations/index.js';
 
 export type {
@@ -128,6 +131,8 @@ export type {
   FirecrawlScrapeOutput,
   FirecrawlCrawlInput,
   FirecrawlCrawlOutput,
+  FirecrawlExtractInput,
+  FirecrawlExtractOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -174,6 +179,7 @@ import {
   searchContactsNode,
   firecrawlScrapeNode,
   firecrawlCrawlNode,
+  firecrawlExtractNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -206,6 +212,7 @@ export const builtInNodes = [
   searchContactsNode,
   firecrawlScrapeNode,
   firecrawlCrawlNode,
+  firecrawlExtractNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,

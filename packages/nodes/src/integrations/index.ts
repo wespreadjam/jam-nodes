@@ -65,4 +65,9 @@ export {
   FirecrawlCrawlOutputSchema,
   type FirecrawlCrawlInput,
   type FirecrawlCrawlOutput,
+  firecrawlExtractNode,
+  FirecrawlExtractInputSchema,
+  FirecrawlExtractOutputSchema,
+  type FirecrawlExtractInput,
+  type FirecrawlExtractOutput,
 } from './firecrawl/index.js';

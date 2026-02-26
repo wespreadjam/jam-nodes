@@ -13,3 +13,11 @@ export {
   type FirecrawlCrawlInput,
   type FirecrawlCrawlOutput,
 } from './crawl.js';
+
+export {
+  firecrawlExtractNode,
+  FirecrawlExtractInputSchema,
+  FirecrawlExtractOutputSchema,
+  type FirecrawlExtractInput,
+  type FirecrawlExtractOutput,
+} from './extract.js';
