@@ -96,6 +96,10 @@ export {
   searchContactsNode,
   SearchContactsInputSchema,
   SearchContactsOutputSchema,
+  // Firecrawl
+  firecrawlCrawlNode,
+  FirecrawlCrawlInputSchema,
+  FirecrawlCrawlOutputSchema,
 } from './integrations/index.js';
 
 export type {
@@ -117,6 +121,8 @@ export type {
   SeoIssue,
   SearchContactsInput,
   SearchContactsOutput,
+  FirecrawlCrawlInput,
+  FirecrawlCrawlOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -161,6 +167,7 @@ import {
   seoKeywordResearchNode,
   seoAuditNode,
   searchContactsNode,
+  firecrawlCrawlNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -191,6 +198,7 @@ export const builtInNodes = [
   seoKeywordResearchNode,
   seoAuditNode,
   searchContactsNode,
+  firecrawlCrawlNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,

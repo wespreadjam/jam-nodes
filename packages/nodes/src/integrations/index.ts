@@ -52,3 +52,12 @@ export {
   type SearchContactsInput,
   type SearchContactsOutput,
 } from './apollo/index.js';
+
+// Firecrawl integrations
+export {
+  firecrawlCrawlNode,
+  FirecrawlCrawlInputSchema,
+  FirecrawlCrawlOutputSchema,
+  type FirecrawlCrawlInput,
+  type FirecrawlCrawlOutput,
+} from './firecrawl/index.js';
