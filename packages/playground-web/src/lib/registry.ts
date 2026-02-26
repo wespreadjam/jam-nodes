@@ -71,6 +71,7 @@ export const NODE_SERVICE_REQUIREMENTS: Record<string, string[]> = {
   social_keyword_generator: ['anthropic'],
   draft_emails: ['anthropic'],
   social_ai_analyze: ['anthropic'],
+  firecrawl_scrape: ['firecrawl'],
   firecrawl_crawl: ['firecrawl'],
 };
 

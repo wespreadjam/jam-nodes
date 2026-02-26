@@ -30,6 +30,7 @@ export type {
   OpenAIClient,
   AnthropicClient,
   FirecrawlClient,
+  FirecrawlScrapeResult,
   FirecrawlCrawlResult,
   NotificationService,
   StorageService,
