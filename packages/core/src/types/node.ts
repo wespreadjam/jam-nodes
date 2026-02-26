@@ -10,6 +10,10 @@ export interface NodeCredentials {
   apollo?: {
     apiKey: string;
   };
+  /** Firecrawl API credentials  */
+  firecrawl?: {
+    bearerToken?: string;
+  }
   /** Twitter/X API credentials */
   twitter?: {
     /** Official Twitter API v2 Bearer Token */

@@ -123,6 +123,45 @@ export interface LinkedInPost {
 }
 
 /**
+ * Firecrawl API client for web scraping and crawling.
+ */
+export interface FirecrawlClient {
+  crawl(params: {
+    url: string;
+    excludePaths?: string[];
+    includePaths?: string[];
+    maxDiscoveryDepth?: number;
+    limit?: number;
+  }): Promise<FirecrawlCrawlResult>;
+}
+
+export interface FirecrawlCrawlResult {
+  status: 'completed' | 'failed';
+  total: number;
+  completed: number;
+  creditsUsed: number;
+  expiresAt: string;
+  data: Array<{
+    markdown?: string;
+    html?: string | null;
+    rawHtml?: string | null;
+    links?: string[];
+    screenshot?: string | null;
+    metadata?: {
+      title?: string | string[];
+      description?: string | string[];
+      language?: string | string[];
+      sourceURL?: string;
+      url?: string;
+      keywords?: string | string[];
+      statusCode?: number;
+      error?: string | null;
+      [key: string]: unknown; // Any other metadata scraped
+    };
+  }>;
+}
+
+/**
  * OpenAI API client for AI generation.
  */
 export interface OpenAIClient {
@@ -273,6 +312,7 @@ export interface NodeServices {
   // API Clients
   apollo?: ApolloClient;
   dataForSeo?: DataForSeoClient;
+  firecrawl?: FirecrawlClient;
   twitter?: TwitterClient;
   forumScout?: ForumScoutClient;
   openai?: OpenAIClient;

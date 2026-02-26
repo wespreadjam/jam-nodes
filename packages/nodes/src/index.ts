@@ -109,6 +109,10 @@ export {
   DiscordEmbedSchema,
   discordBotCredential,
   discordWebhookCredential,
+  // Firecrawl
+  firecrawlCrawlNode,
+  FirecrawlCrawlInputSchema,
+  FirecrawlCrawlOutputSchema,
 } from './integrations/index.js';
 
 export type {
@@ -137,6 +141,8 @@ export type {
   DiscordCreateThreadInput,
   DiscordCreateThreadOutput,
   DiscordEmbed,
+  FirecrawlCrawlInput,
+  FirecrawlCrawlOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -184,6 +190,7 @@ import {
   discordSendMessageNode,
   discordSendWebhookNode,
   discordCreateThreadNode,
+  firecrawlCrawlNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -217,6 +224,7 @@ export const builtInNodes = [
   discordSendMessageNode,
   discordSendWebhookNode,
   discordCreateThreadNode,
+  firecrawlCrawlNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,

@@ -74,6 +74,7 @@ export const NODE_SERVICE_REQUIREMENTS: Record<string, string[]> = {
   discord_send_message: ['discordBot'],
   discord_send_webhook: ['discordWebhook'],
   discord_create_thread: ['discordBot'],
+  firecrawl_crawl: ['firecrawl'],
 };
 
 /**

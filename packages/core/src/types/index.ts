@@ -29,6 +29,8 @@ export type {
   LinkedInPost,
   OpenAIClient,
   AnthropicClient,
+  FirecrawlClient,
+  FirecrawlCrawlResult,
   NotificationService,
   StorageService,
   CacheService,
