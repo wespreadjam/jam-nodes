@@ -78,6 +78,11 @@ export {
 
 // Firecrawl integrations
 export {
+  firecrawlScrapeNode,
+  FirecrawlScrapeInputSchema,
+  FirecrawlScrapeOutputSchema,
+  type FirecrawlScrapeInput,
+  type FirecrawlScrapeOutput,
   firecrawlCrawlNode,
   FirecrawlCrawlInputSchema,
   FirecrawlCrawlOutputSchema,

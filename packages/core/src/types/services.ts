@@ -126,6 +126,13 @@ export interface LinkedInPost {
  * Firecrawl API client for web scraping and crawling.
  */
 export interface FirecrawlClient {
+  scrape(params: {
+    url: string;
+    formats?: unknown[];
+    onlyMainContent?: boolean;
+    waitFor?: number;
+  }): Promise<FirecrawlScrapeResult>;
+
   crawl(params: {
     url: string;
     excludePaths?: string[];
@@ -133,6 +140,45 @@ export interface FirecrawlClient {
     maxDiscoveryDepth?: number;
     limit?: number;
   }): Promise<FirecrawlCrawlResult>;
+}
+
+export interface FirecrawlScrapeResult {
+  success: boolean;
+  data: {
+    markdown?: string;
+    summary?: string | null;
+    html?: string | null;
+    rawHtml?: string | null;
+    screenshot?: string | null;
+    links?: string[];
+    actions?: {
+      screenshots?: string[];
+      scrapes?: { url: string; html: string }[];
+      javascriptReturns?: { type: string; value: unknown }[];
+      pdfs?: string[];
+    } | null;
+    metadata?: {
+      title?: string | string[];
+      description?: string | string[];
+      language?: string | string[] | null;
+      sourceURL?: string;
+      url?: string;
+      keywords?: string | string[];
+      ogLocaleAlternate?: string[];
+      statusCode?: number;
+      error?: string | null;
+      [key: string]: unknown; // Any other metadata
+    };
+    warning?: string | null;
+    changeTracking?: {
+      previousScrapeAt?: string;
+      changeStatus?: 'new' | 'same' | 'changed' | 'removed';
+      visibility?: 'visible' | 'hidden';
+      diff?: string | null;
+      json?: Record<string, unknown>;
+    } | null;
+    branding?: Record<string, unknown> | null;
+  };
 }
 
 export interface FirecrawlCrawlResult {
