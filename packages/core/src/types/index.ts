@@ -62,3 +62,16 @@ export {
   defineBearerCredential,
   defineBasicCredential,
 } from './credentials.js';
+
+export type {
+  RetryConfig,
+  CacheStore,
+  CacheConfig,
+  ExecutionConfig,
+  WorkflowExecutionConfig,
+  WorkflowExecutionResult,
+  Workflow,
+  WorkflowNode,
+  WorkflowEdge,
+  NodeStatus,
+} from './execution.js';

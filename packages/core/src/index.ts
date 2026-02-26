@@ -48,6 +48,17 @@ export type {
   ResolvedCredentials,
   CredentialProvider,
   CredentialRegistry,
+  // Execution engine types
+  RetryConfig,
+  CacheStore,
+  CacheConfig,
+  ExecutionConfig,
+  WorkflowExecutionConfig,
+  WorkflowExecutionResult,
+  Workflow,
+  WorkflowNode,
+  WorkflowEdge,
+  NodeStatus,
 } from './types/index.js';
 
 // Credential helpers
@@ -58,11 +69,14 @@ export {
   defineBasicCredential,
 } from './types/index.js';
 
-// Execution context
+// Execution
 export {
   ExecutionContext,
   createExecutionContext,
   prepareNodeInput,
+  executeNode,
+  executeWorkflow,
+  MemoryCacheStore,
 } from './execution/index.js';
 
 // Registry
