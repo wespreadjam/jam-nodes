@@ -339,9 +339,12 @@ export const seoAuditNode = defineNode({
           let isPassed: boolean;
 
           if (POSITIVE_CHECKS.has(checkId)) {
+            // Positive checks: passed=true means the good thing IS present (e.g. is_https)
             isPassed = checkData.passed;
           } else {
-            isPassed = checkData.passed;
+            // Normal checks: passed=true means the problem is ABSENT (i.e. the page is clean)
+            // DataForSEO sets passed=true to mean "no issue found", so invert for our tracking
+            isPassed = !checkData.passed;
           }
 
           if (isPassed) {

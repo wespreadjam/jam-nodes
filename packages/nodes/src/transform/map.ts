@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { defineNode } from '@jam-nodes/core';
+import { resolvePath } from '../utils/resolve-path.js';
 
 /**
  * Input schema for map node
@@ -22,34 +23,6 @@ export const MapOutputSchema = z.object({
 });
 
 export type MapOutput = z.infer<typeof MapOutputSchema>;
-
-/**
- * Resolve a nested path on an object
- */
-function resolvePath(obj: unknown, path: string): unknown {
-  const parts = path.split('.');
-  let current: unknown = obj;
-
-  for (const part of parts) {
-    if (current === null || current === undefined) {
-      return undefined;
-    }
-
-    // Handle array access like "[0]"
-    const arrayMatch = part.match(/^\[(\d+)\]$/);
-    if (arrayMatch) {
-      if (Array.isArray(current)) {
-        current = current[parseInt(arrayMatch[1]!, 10)];
-      } else {
-        return undefined;
-      }
-    } else {
-      current = (current as Record<string, unknown>)[part];
-    }
-  }
-
-  return current;
-}
 
 /**
  * Map node - extract a property from each item in an array.

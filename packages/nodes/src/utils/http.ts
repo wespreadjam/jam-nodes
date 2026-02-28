@@ -105,6 +105,14 @@ export async function fetchWithRetry(
           await sleep(delayMs);
           continue;
         }
+
+        // All retries exhausted — throw instead of returning the 429 response
+        const errorText = await response.text();
+        throw new FetchRetryError(
+          `Rate limit exceeded after ${maxRetries} attempts`,
+          429,
+          errorText
+        );
       }
 
       // Retry on server errors

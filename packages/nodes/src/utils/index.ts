@@ -5,3 +5,5 @@ export {
   FetchRetryError,
   type FetchWithRetryOptions,
 } from './http.js';
+
+export { resolvePath } from './resolve-path.js';

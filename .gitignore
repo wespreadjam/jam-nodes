@@ -26,3 +26,6 @@ coverage/
 *.temp
 .direnv
 .env
+
+# Embedded repo (nested clone — not a submodule)
+jam-nodes/
