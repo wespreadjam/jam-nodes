@@ -34,6 +34,14 @@ export interface NodeCredentials {
   anthropic?: {
     apiKey: string;
   };
+  /** Discord Bot credentials */
+  discordBot?: {
+    botToken: string;
+  };
+  /** Discord Webhook credentials */
+  discordWebhook?: {
+    webhookUrl: string;
+  };
 }
 
 /**

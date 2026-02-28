@@ -52,3 +52,26 @@ export {
   type SearchContactsInput,
   type SearchContactsOutput,
 } from './apollo/index.js';
+
+// Discord integrations
+export {
+  discordSendMessageNode,
+  DiscordSendMessageInputSchema,
+  DiscordSendMessageOutputSchema,
+  type DiscordSendMessageInput,
+  type DiscordSendMessageOutput,
+  discordSendWebhookNode,
+  DiscordSendWebhookInputSchema,
+  DiscordSendWebhookOutputSchema,
+  type DiscordSendWebhookInput,
+  type DiscordSendWebhookOutput,
+  discordCreateThreadNode,
+  DiscordCreateThreadInputSchema,
+  DiscordCreateThreadOutputSchema,
+  type DiscordCreateThreadInput,
+  type DiscordCreateThreadOutput,
+  DiscordEmbedSchema,
+  type DiscordEmbed,
+  discordBotCredential,
+  discordWebhookCredential,
+} from './discord/index.js';
