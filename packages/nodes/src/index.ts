@@ -96,6 +96,19 @@ export {
   searchContactsNode,
   SearchContactsInputSchema,
   SearchContactsOutputSchema,
+  // Discord
+  discordSendMessageNode,
+  DiscordSendMessageInputSchema,
+  DiscordSendMessageOutputSchema,
+  discordSendWebhookNode,
+  DiscordSendWebhookInputSchema,
+  DiscordSendWebhookOutputSchema,
+  discordCreateThreadNode,
+  DiscordCreateThreadInputSchema,
+  DiscordCreateThreadOutputSchema,
+  DiscordEmbedSchema,
+  discordBotCredential,
+  discordWebhookCredential,
 } from './integrations/index.js';
 
 export type {
@@ -117,6 +130,13 @@ export type {
   SeoIssue,
   SearchContactsInput,
   SearchContactsOutput,
+  DiscordSendMessageInput,
+  DiscordSendMessageOutput,
+  DiscordSendWebhookInput,
+  DiscordSendWebhookOutput,
+  DiscordCreateThreadInput,
+  DiscordCreateThreadOutput,
+  DiscordEmbed,
 } from './integrations/index.js';
 
 // AI nodes
@@ -161,6 +181,9 @@ import {
   seoKeywordResearchNode,
   seoAuditNode,
   searchContactsNode,
+  discordSendMessageNode,
+  discordSendWebhookNode,
+  discordCreateThreadNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -191,6 +214,9 @@ export const builtInNodes = [
   seoKeywordResearchNode,
   seoAuditNode,
   searchContactsNode,
+  discordSendMessageNode,
+  discordSendWebhookNode,
+  discordCreateThreadNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,

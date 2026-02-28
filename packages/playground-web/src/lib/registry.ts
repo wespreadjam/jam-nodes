@@ -71,6 +71,9 @@ export const NODE_SERVICE_REQUIREMENTS: Record<string, string[]> = {
   social_keyword_generator: ['anthropic'],
   draft_emails: ['anthropic'],
   social_ai_analyze: ['anthropic'],
+  discord_send_message: ['discordBot'],
+  discord_send_webhook: ['discordWebhook'],
+  discord_create_thread: ['discordBot'],
 };
 
 /**

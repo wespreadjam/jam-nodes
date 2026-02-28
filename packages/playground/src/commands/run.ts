@@ -41,6 +41,9 @@ const NODE_CREDENTIAL_REQUIREMENTS: Record<string, { service: string; fields: { 
   social_keyword_generator: [{ service: 'anthropic', fields: [{ name: 'apiKey', envVar: 'ANTHROPIC_API_KEY' }] }],
   draft_emails: [{ service: 'anthropic', fields: [{ name: 'apiKey', envVar: 'ANTHROPIC_API_KEY' }] }],
   social_ai_analyze: [{ service: 'anthropic', fields: [{ name: 'apiKey', envVar: 'ANTHROPIC_API_KEY' }] }],
+  discord_send_message: [{ service: 'discordBot', fields: [{ name: 'botToken', envVar: 'DISCORD_BOT_TOKEN' }] }],
+  discord_send_webhook: [{ service: 'discordWebhook', fields: [{ name: 'webhookUrl', envVar: 'DISCORD_WEBHOOK_URL' }] }],
+  discord_create_thread: [{ service: 'discordBot', fields: [{ name: 'botToken', envVar: 'DISCORD_BOT_TOKEN' }] }],
 };
 
 /**

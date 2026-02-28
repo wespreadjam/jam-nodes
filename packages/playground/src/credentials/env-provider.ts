@@ -50,6 +50,8 @@ const ENV_VAR_MAPPINGS: Record<string, string[]> = {
   hubspot: ['JAM_HUBSPOT_API_KEY', 'HUBSPOT_API_KEY'],
   clearbit: ['JAM_CLEARBIT_API_KEY', 'CLEARBIT_API_KEY'],
   dropcontact: ['JAM_DROPCONTACT_API_KEY', 'DROPCONTACT_API_KEY'],
+  discordbot: ['JAM_DISCORD_BOT_TOKEN', 'DISCORD_BOT_TOKEN'],
+  discordwebhook: ['JAM_DISCORD_WEBHOOK_URL', 'DISCORD_WEBHOOK_URL'],
 };
 
 /**
@@ -62,6 +64,12 @@ function getFromEnv(name: string): Record<string, string> | null {
     for (const varName of envVars) {
       const value = process.env[varName];
       if (value) {
+        if (name.toLowerCase() === 'discordbot') {
+          return { botToken: value };
+        }
+        if (name.toLowerCase() === 'discordwebhook') {
+          return { webhookUrl: value };
+        }
         return { apiKey: value };
       }
     }
