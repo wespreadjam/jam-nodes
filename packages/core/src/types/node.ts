@@ -46,6 +46,12 @@ export interface NodeCredentials {
   discordWebhook?: {
     webhookUrl: string;
   };
+  /** WordPress Application Password credentials */
+  wordpress?: {
+    siteUrl: string;
+    username: string;
+    applicationPassword: string;
+  };
 }
 
 /**

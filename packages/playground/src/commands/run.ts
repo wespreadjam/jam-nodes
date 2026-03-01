@@ -44,6 +44,9 @@ const NODE_CREDENTIAL_REQUIREMENTS: Record<string, { service: string; fields: { 
   discord_send_message: [{ service: 'discordBot', fields: [{ name: 'botToken', envVar: 'DISCORD_BOT_TOKEN' }] }],
   discord_send_webhook: [{ service: 'discordWebhook', fields: [{ name: 'webhookUrl', envVar: 'DISCORD_WEBHOOK_URL' }] }],
   discord_create_thread: [{ service: 'discordBot', fields: [{ name: 'botToken', envVar: 'DISCORD_BOT_TOKEN' }] }],
+  wordpress_create_post: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
+  wordpress_update_post: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
+  wordpress_get_posts: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
 };
 
 /**

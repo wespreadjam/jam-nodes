@@ -94,3 +94,26 @@ export {
   type FirecrawlExtractInput,
   type FirecrawlExtractOutput,
 } from './firecrawl/index.js';
+
+// WordPress integrations
+export {
+  wordpressCreatePostNode,
+  wordpressUpdatePostNode,
+  wordpressGetPostsNode,
+  wordpressCredential,
+  WordPressPostSchema,
+  WordPressCreatePostInputSchema,
+  WordPressCreatePostOutputSchema,
+  WordPressUpdatePostInputSchema,
+  WordPressUpdatePostOutputSchema,
+  WordPressGetPostsInputSchema,
+  WordPressGetPostsOutputSchema,
+  normalizeWordPressPost,
+  type WordPressPost,
+  type WordPressCreatePostInput,
+  type WordPressCreatePostOutput,
+  type WordPressUpdatePostInput,
+  type WordPressUpdatePostOutput,
+  type WordPressGetPostsInput,
+  type WordPressGetPostsOutput,
+} from './wordpress/index.js';

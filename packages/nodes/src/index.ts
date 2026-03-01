@@ -119,6 +119,18 @@ export {
   firecrawlExtractNode,
   FirecrawlExtractInputSchema,
   FirecrawlExtractOutputSchema,
+  // WordPress
+  wordpressCreatePostNode,
+  WordPressCreatePostInputSchema,
+  WordPressCreatePostOutputSchema,
+  wordpressUpdatePostNode,
+  WordPressUpdatePostInputSchema,
+  WordPressUpdatePostOutputSchema,
+  wordpressGetPostsNode,
+  WordPressGetPostsInputSchema,
+  WordPressGetPostsOutputSchema,
+  WordPressPostSchema,
+  wordpressCredential,
 } from './integrations/index.js';
 
 export type {
@@ -153,6 +165,13 @@ export type {
   FirecrawlCrawlOutput,
   FirecrawlExtractInput,
   FirecrawlExtractOutput,
+  WordPressPost,
+  WordPressCreatePostInput,
+  WordPressCreatePostOutput,
+  WordPressUpdatePostInput,
+  WordPressUpdatePostOutput,
+  WordPressGetPostsInput,
+  WordPressGetPostsOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -203,6 +222,9 @@ import {
   firecrawlScrapeNode,
   firecrawlCrawlNode,
   firecrawlExtractNode,
+  wordpressCreatePostNode,
+  wordpressUpdatePostNode,
+  wordpressGetPostsNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -239,6 +261,9 @@ export const builtInNodes = [
   firecrawlScrapeNode,
   firecrawlCrawlNode,
   firecrawlExtractNode,
+  wordpressCreatePostNode,
+  wordpressUpdatePostNode,
+  wordpressGetPostsNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,
