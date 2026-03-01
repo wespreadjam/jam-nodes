@@ -31,6 +31,15 @@ export interface NodeCredentials {
   devto?: {
     apiKey: string;
   };
+  discordBot?: {
+    token: string;
+  };
+  discordWebhook?: {
+    url: string;
+  };
+  firecrawl?: {
+    apiKey: string;
+  };
 }
 
 /**
