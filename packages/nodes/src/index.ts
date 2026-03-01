@@ -11,7 +11,7 @@ export {
   EndOutputSchema,
   DelayInputSchema,
   DelayOutputSchema,
-} from './logic/index.js';
+} from './logic/index.js'
 
 export type {
   ConditionalInput,
@@ -22,7 +22,7 @@ export type {
   EndOutput,
   DelayInput,
   DelayOutput,
-} from './logic/index.js';
+} from './logic/index.js'
 
 // Transform nodes
 export {
@@ -37,7 +37,7 @@ export {
   SortInputSchema,
   SortOutputSchema,
   SortDirectionSchema,
-} from './transform/index.js';
+} from './transform/index.js'
 
 export type {
   MapInput,
@@ -48,7 +48,7 @@ export type {
   SortInput,
   SortOutput,
   SortDirection,
-} from './transform/index.js';
+} from './transform/index.js'
 
 // Example nodes
 export {
@@ -59,7 +59,7 @@ export {
   breadNode,
   BreadInputSchema,
   BreadOutputSchema,
-} from './examples/index.js';
+} from './examples/index.js'
 
 export type {
   HttpRequestInput,
@@ -67,7 +67,7 @@ export type {
   HttpMethod,
   BreadInput,
   BreadOutput,
-} from './examples/index.js';
+} from './examples/index.js'
 
 // Integration nodes
 export {
@@ -119,7 +119,19 @@ export {
   firecrawlExtractNode,
   FirecrawlExtractInputSchema,
   FirecrawlExtractOutputSchema,
-} from './integrations/index.js';
+  // Dev.to
+  devtoCreateArticleNode,
+  DevtoArticleSchema,
+  DevtoCreateArticleInputSchema,
+  DevtoCreateArticleOutputSchema,
+  devtoUpdateArticleNode,
+  DevtoUpdateArticleInputSchema,
+  DevtoUpdateArticleOutputSchema,
+  devtoGetArticlesNode,
+  DevtoGetArticlesInputSchema,
+  DevtoGetArticlesOutputSchema,
+  devtoCredential,
+} from './integrations/index.js'
 
 export type {
   RedditMonitorInput,
@@ -153,7 +165,14 @@ export type {
   FirecrawlCrawlOutput,
   FirecrawlExtractInput,
   FirecrawlExtractOutput,
-} from './integrations/index.js';
+  DevtoArticle,
+  DevtoCreateArticleInput,
+  DevtoCreateArticleOutput,
+  DevtoUpdateArticleInput,
+  DevtoUpdateArticleOutput,
+  DevtoGetArticlesInput,
+  DevtoGetArticlesOutput,
+} from './integrations/index.js'
 
 // AI nodes
 export {
@@ -168,7 +187,7 @@ export {
   socialAiAnalyzeNode,
   SocialAiAnalyzeInputSchema,
   SocialAiAnalyzeOutputSchema,
-} from './ai/index.js';
+} from './ai/index.js'
 
 export type {
   SocialKeywordGeneratorInput,
@@ -181,14 +200,14 @@ export type {
   SocialAiAnalyzeOutput,
   SocialPost,
   AnalyzedPost,
-} from './ai/index.js';
+} from './ai/index.js'
 
 // All nodes as a collection
-import { conditionalNode } from './logic/index.js';
-import { endNode } from './logic/index.js';
-import { delayNode } from './logic/index.js';
-import { mapNode, filterNode, sortNode } from './transform/index.js';
-import { httpRequestNode, breadNode } from './examples/index.js';
+import { conditionalNode } from './logic/index.js'
+import { endNode } from './logic/index.js'
+import { delayNode } from './logic/index.js'
+import { mapNode, filterNode, sortNode } from './transform/index.js'
+import { httpRequestNode, breadNode } from './examples/index.js'
 import {
   redditMonitorNode,
   twitterMonitorNode,
@@ -203,12 +222,15 @@ import {
   firecrawlScrapeNode,
   firecrawlCrawlNode,
   firecrawlExtractNode,
-} from './integrations/index.js';
+  devtoCreateArticleNode,
+  devtoUpdateArticleNode,
+  devtoGetArticlesNode,
+} from './integrations/index.js'
 import {
   socialKeywordGeneratorNode,
   draftEmailsNode,
   socialAiAnalyzeNode,
-} from './ai/index.js';
+} from './ai/index.js'
 
 /**
  * All built-in nodes as an array for easy registration
@@ -239,8 +261,11 @@ export const builtInNodes = [
   firecrawlScrapeNode,
   firecrawlCrawlNode,
   firecrawlExtractNode,
+  devtoCreateArticleNode,
+  devtoUpdateArticleNode,
+  devtoGetArticlesNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,
   socialAiAnalyzeNode,
-];
+]
