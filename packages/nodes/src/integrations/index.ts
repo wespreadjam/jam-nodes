@@ -53,6 +53,16 @@ export {
   type SearchContactsOutput,
 } from './apollo/index.js';
 
+// Dev.to integrations
+export {
+  devtoNode,
+  DevToInputSchema,
+  DevToOutputSchema,
+  type DevToInput,
+  type DevToOutput,
+  type DevToArticle,
+} from './devto/index.js';
+
 // Discord integrations
 export {
   discordSendMessageNode,

@@ -5,7 +5,7 @@
 
 import { NodeRegistry, ExecutionContext, defineNode, executeNode, executeWorkflow, MemoryCacheStore } from './packages/core/src/index';
 import type { Workflow } from './packages/core/src/index';
-import { conditionalNode, endNode, delayNode, mapNode, filterNode, sortNode, httpRequestNode, breadNode, builtInNodes } from './packages/nodes/src/index';
+import { conditionalNode, endNode, delayNode, mapNode, filterNode, sortNode, httpRequestNode, breadNode, devtoNode, builtInNodes } from './packages/nodes/src/index';
 import { z } from 'zod';
 
 async function test() {

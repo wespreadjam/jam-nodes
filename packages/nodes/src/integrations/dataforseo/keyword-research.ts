@@ -2,15 +2,10 @@ import { z } from 'zod';
 import { defineNode } from '@jam-nodes/core';
 import { fetchWithRetry } from '../../utils/http.js';
 
-// =============================================================================
 // Constants
-// =============================================================================
-
 const DATAFORSEO_BASE_URL = 'https://api.dataforseo.com/v3';
 
-// =============================================================================
 // Types
-// =============================================================================
 
 interface DataForSEOKeywordIdea {
   keyword: string;
@@ -36,9 +31,7 @@ interface DataForSEOResponse {
   }>;
 }
 
-// =============================================================================
 // Schemas
-// =============================================================================
 
 export const SeoKeywordResearchInputSchema = z.object({
   /** Seed keywords to research */
@@ -58,7 +51,7 @@ export const SeoKeywordResearchOutputSchema = z.object({
     keyword: z.string(),
     searchVolume: z.number(),
     keywordDifficulty: z.number(),
-    cpc: z.string(),
+    cpc: z.number(),
     searchIntent: z.enum(['informational', 'commercial', 'navigational', 'transactional']),
   })),
   totalResearched: z.number(),
@@ -130,9 +123,7 @@ function normalizeSearchIntent(intent: string | undefined): 'informational' | 'c
   return 'informational';
 }
 
-// =============================================================================
 // Node Definition
-// =============================================================================
 
 /**
  * SEO Keyword Research Node
@@ -197,7 +188,7 @@ export const seoKeywordResearchNode = defineNode({
               keyword: kw.keyword,
               searchVolume: kw.keyword_info?.search_volume || 0,
               keywordDifficulty: kw.keyword_properties?.keyword_difficulty || 0,
-              cpc: (kw.keyword_info?.cpc || 0).toString(),
+              cpc: kw.keyword_info?.cpc || 0,
               searchIntent: normalizeSearchIntent(kw.search_intent_info?.main_intent),
             });
           }

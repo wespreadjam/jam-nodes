@@ -13,15 +13,13 @@ export interface NodeCredentials {
   /** Firecrawl API credentials  */
   firecrawl?: {
     bearerToken?: string;
-  }
+    apiKey?: string;
+  };
   /** Twitter/X API credentials */
   twitter?: {
-    /** Official Twitter API v2 Bearer Token */
     bearerToken?: string;
-    /** TwitterAPI.io API key (third-party, simpler) */
     twitterApiIoKey?: string;
   };
-  /** ForumScout API credentials (for LinkedIn monitoring) */
   forumScout?: {
     apiKey: string;
   };
@@ -30,12 +28,13 @@ export interface NodeCredentials {
     /** Base64 encoded login:password */
     apiToken: string;
   };
-  /** OpenAI API credentials */
   openai?: {
     apiKey: string;
   };
-  /** Anthropic API credentials */
   anthropic?: {
+    apiKey: string;
+  };
+  devto?: {
     apiKey: string;
   };
   /** Discord Bot credentials */
@@ -120,9 +119,6 @@ export type NodeExecutor<TInput = unknown, TOutput = unknown> = (
   context: NodeExecutionContext
 ) => Promise<NodeExecutionResult<TOutput>>;
 
-/**
- * Node capabilities for UI and runtime behavior.
- */
 export interface NodeCapabilities {
   /** Node supports data enrichment */
   supportsEnrichment?: boolean;
