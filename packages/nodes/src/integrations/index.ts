@@ -18,7 +18,7 @@ export {
   type LinkedInMonitorInput,
   type LinkedInMonitorOutput,
   type LinkedInPost,
-} from './social/index.js';
+} from './social/index.js'
 
 // OpenAI integrations
 export {
@@ -27,7 +27,7 @@ export {
   SoraVideoOutputSchema,
   type SoraVideoInput,
   type SoraVideoOutput,
-} from './openai/index.js';
+} from './openai/index.js'
 
 // DataForSEO integrations
 export {
@@ -42,7 +42,7 @@ export {
   type SeoAuditInput,
   type SeoAuditOutput,
   type SeoIssue,
-} from './dataforseo/index.js';
+} from './dataforseo/index.js'
 
 // Apollo integrations
 export {
@@ -51,7 +51,7 @@ export {
   SearchContactsOutputSchema,
   type SearchContactsInput,
   type SearchContactsOutput,
-} from './apollo/index.js';
+} from './apollo/index.js'
 
 // Discord integrations
 export {
@@ -74,7 +74,7 @@ export {
   type DiscordEmbed,
   discordBotCredential,
   discordWebhookCredential,
-} from './discord/index.js';
+} from './discord/index.js'
 
 // Firecrawl integrations
 export {
@@ -93,4 +93,27 @@ export {
   FirecrawlExtractOutputSchema,
   type FirecrawlExtractInput,
   type FirecrawlExtractOutput,
-} from './firecrawl/index.js';
+} from './firecrawl/index.js'
+
+// Dev.to integrations
+export {
+  devtoCreateArticleNode,
+  devtoUpdateArticleNode,
+  devtoGetArticlesNode,
+  DevtoArticleSchema,
+  DevtoCreateArticleInputSchema,
+  DevtoCreateArticleOutputSchema,
+  DevtoUpdateArticleInputSchema,
+  DevtoUpdateArticleOutputSchema,
+  DevtoGetArticlesInputSchema,
+  DevtoGetArticlesOutputSchema,
+  normalizeDevtoArticle,
+  devtoCredential,
+  type DevtoArticle,
+  type DevtoCreateArticleInput,
+  type DevtoCreateArticleOutput,
+  type DevtoUpdateArticleInput,
+  type DevtoUpdateArticleOutput,
+  type DevtoGetArticlesInput,
+  type DevtoGetArticlesOutput,
+} from './devto/index.js'
