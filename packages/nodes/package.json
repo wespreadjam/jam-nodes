@@ -1,6 +1,6 @@
 {
   "name": "@jam-nodes/nodes",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Built-in workflow nodes for jam-nodes framework",
   "type": "module",
   "main": "./dist/index.js",
