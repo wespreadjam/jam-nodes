@@ -122,6 +122,8 @@ export const CREDENTIAL_SCHEMAS: Record<
     { name: 'password', label: 'Password', type: 'password' },
   ],
   forumscout: [{ name: 'apiKey', label: 'API Key', type: 'password' }],
+  discordbot: [{ name: 'botToken', label: 'Bot Token', type: 'password' }],
+  discordwebhook: [{ name: 'webhookUrl', label: 'Webhook URL', type: 'text' }],
 };
 
 /**

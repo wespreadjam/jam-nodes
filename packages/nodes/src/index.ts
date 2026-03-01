@@ -99,6 +99,29 @@ export {
   devtoNode,
   DevToInputSchema,
   DevToOutputSchema,
+  // Discord
+  discordSendMessageNode,
+  DiscordSendMessageInputSchema,
+  DiscordSendMessageOutputSchema,
+  discordSendWebhookNode,
+  DiscordSendWebhookInputSchema,
+  DiscordSendWebhookOutputSchema,
+  discordCreateThreadNode,
+  DiscordCreateThreadInputSchema,
+  DiscordCreateThreadOutputSchema,
+  DiscordEmbedSchema,
+  discordBotCredential,
+  discordWebhookCredential,
+  // Firecrawl
+  firecrawlScrapeNode,
+  FirecrawlScrapeInputSchema,
+  FirecrawlScrapeOutputSchema,
+  firecrawlCrawlNode,
+  FirecrawlCrawlInputSchema,
+  FirecrawlCrawlOutputSchema,
+  firecrawlExtractNode,
+  FirecrawlExtractInputSchema,
+  FirecrawlExtractOutputSchema,
 } from './integrations/index.js';
 
 export type {
@@ -123,6 +146,19 @@ export type {
   DevToInput,
   DevToOutput,
   DevToArticle,
+  DiscordSendMessageInput,
+  DiscordSendMessageOutput,
+  DiscordSendWebhookInput,
+  DiscordSendWebhookOutput,
+  DiscordCreateThreadInput,
+  DiscordCreateThreadOutput,
+  DiscordEmbed,
+  FirecrawlScrapeInput,
+  FirecrawlScrapeOutput,
+  FirecrawlCrawlInput,
+  FirecrawlCrawlOutput,
+  FirecrawlExtractInput,
+  FirecrawlExtractOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -168,6 +204,12 @@ import {
   seoAuditNode,
   searchContactsNode,
   devtoNode,
+  discordSendMessageNode,
+  discordSendWebhookNode,
+  discordCreateThreadNode,
+  firecrawlScrapeNode,
+  firecrawlCrawlNode,
+  firecrawlExtractNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -199,6 +241,12 @@ export const builtInNodes = [
   seoAuditNode,
   searchContactsNode,
   devtoNode,
+  discordSendMessageNode,
+  discordSendWebhookNode,
+  discordCreateThreadNode,
+  firecrawlScrapeNode,
+  firecrawlCrawlNode,
+  firecrawlExtractNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,

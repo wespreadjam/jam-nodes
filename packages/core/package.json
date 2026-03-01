@@ -1,6 +1,6 @@
 {
   "name": "@jam-nodes/core",
-  "version": "0.2.5",
+  "version": "0.2.8",
   "description": "Core framework for building workflow nodes with type-safe executors and Zod validation",
   "type": "module",
   "sideEffects": false,

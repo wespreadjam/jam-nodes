@@ -62,3 +62,45 @@ export {
   type DevToOutput,
   type DevToArticle,
 } from './devto/index.js';
+
+// Discord integrations
+export {
+  discordSendMessageNode,
+  DiscordSendMessageInputSchema,
+  DiscordSendMessageOutputSchema,
+  type DiscordSendMessageInput,
+  type DiscordSendMessageOutput,
+  discordSendWebhookNode,
+  DiscordSendWebhookInputSchema,
+  DiscordSendWebhookOutputSchema,
+  type DiscordSendWebhookInput,
+  type DiscordSendWebhookOutput,
+  discordCreateThreadNode,
+  DiscordCreateThreadInputSchema,
+  DiscordCreateThreadOutputSchema,
+  type DiscordCreateThreadInput,
+  type DiscordCreateThreadOutput,
+  DiscordEmbedSchema,
+  type DiscordEmbed,
+  discordBotCredential,
+  discordWebhookCredential,
+} from './discord/index.js';
+
+// Firecrawl integrations
+export {
+  firecrawlScrapeNode,
+  FirecrawlScrapeInputSchema,
+  FirecrawlScrapeOutputSchema,
+  type FirecrawlScrapeInput,
+  type FirecrawlScrapeOutput,
+  firecrawlCrawlNode,
+  FirecrawlCrawlInputSchema,
+  FirecrawlCrawlOutputSchema,
+  type FirecrawlCrawlInput,
+  type FirecrawlCrawlOutput,
+  firecrawlExtractNode,
+  FirecrawlExtractInputSchema,
+  FirecrawlExtractOutputSchema,
+  type FirecrawlExtractInput,
+  type FirecrawlExtractOutput,
+} from './firecrawl/index.js';

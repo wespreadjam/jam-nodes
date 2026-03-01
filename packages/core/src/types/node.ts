@@ -10,6 +10,12 @@ export interface NodeCredentials {
   apollo?: {
     apiKey: string;
   };
+  /** Firecrawl API credentials  */
+  firecrawl?: {
+    bearerToken?: string;
+    apiKey?: string;
+  };
+  /** Twitter/X API credentials */
   twitter?: {
     bearerToken?: string;
     twitterApiIoKey?: string;
@@ -31,14 +37,13 @@ export interface NodeCredentials {
   devto?: {
     apiKey: string;
   };
+  /** Discord Bot credentials */
   discordBot?: {
-    token: string;
+    botToken: string;
   };
+  /** Discord Webhook credentials */
   discordWebhook?: {
-    url: string;
-  };
-  firecrawl?: {
-    apiKey: string;
+    webhookUrl: string;
   };
 }
 

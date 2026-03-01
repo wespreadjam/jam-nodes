@@ -123,6 +123,105 @@ export interface LinkedInPost {
 }
 
 /**
+ * Firecrawl API client for web scraping and crawling.
+ */
+export interface FirecrawlClient {
+  scrape(params: {
+    url: string;
+    formats?: unknown[];
+    onlyMainContent?: boolean;
+    waitFor?: number;
+  }): Promise<FirecrawlScrapeResult>;
+
+  crawl(params: {
+    url: string;
+    excludePaths?: string[];
+    includePaths?: string[];
+    maxDiscoveryDepth?: number;
+    limit?: number;
+  }): Promise<FirecrawlCrawlResult>;
+
+  extract(params: {
+    urls: string[];
+    prompt?: string;
+    schema?: Record<string, unknown>;
+  }): Promise<FirecrawlExtractResult>;
+}
+
+export interface FirecrawlScrapeResult {
+  success: boolean;
+  data: {
+    markdown?: string;
+    summary?: string | null;
+    html?: string | null;
+    rawHtml?: string | null;
+    screenshot?: string | null;
+    links?: string[];
+    actions?: {
+      screenshots?: string[];
+      scrapes?: { url: string; html: string }[];
+      javascriptReturns?: { type: string; value: unknown }[];
+      pdfs?: string[];
+    } | null;
+    metadata?: {
+      title?: string | string[];
+      description?: string | string[];
+      language?: string | string[] | null;
+      sourceURL?: string;
+      url?: string;
+      keywords?: string | string[];
+      ogLocaleAlternate?: string[];
+      statusCode?: number;
+      error?: string | null;
+      [key: string]: unknown; // Any other metadata
+    };
+    warning?: string | null;
+    changeTracking?: {
+      previousScrapeAt?: string;
+      changeStatus?: 'new' | 'same' | 'changed' | 'removed';
+      visibility?: 'visible' | 'hidden';
+      diff?: string | null;
+      json?: Record<string, unknown>;
+    } | null;
+    branding?: Record<string, unknown> | null;
+  };
+}
+
+export interface FirecrawlCrawlResult {
+  status: 'completed' | 'failed';
+  total: number;
+  completed: number;
+  creditsUsed: number;
+  expiresAt: string;
+  data: Array<{
+    markdown?: string;
+    html?: string | null;
+    rawHtml?: string | null;
+    links?: string[];
+    screenshot?: string | null;
+    metadata?: {
+      title?: string | string[];
+      description?: string | string[];
+      language?: string | string[];
+      sourceURL?: string;
+      url?: string;
+      keywords?: string | string[];
+      statusCode?: number;
+      error?: string | null;
+      [key: string]: unknown; // Any other metadata scraped
+    };
+  }>;
+}
+
+export interface FirecrawlExtractResult {
+  success: boolean;
+  status: 'completed' | 'failed' | 'cancelled';
+  data: Record<string, unknown>;
+  tokensUsed?: number;
+  expiresAt?: string;
+}
+
+/**
  * OpenAI API client for AI generation.
  */
 export interface OpenAIClient {
@@ -273,6 +372,7 @@ export interface NodeServices {
   // API Clients
   apollo?: ApolloClient;
   dataForSeo?: DataForSeoClient;
+  firecrawl?: FirecrawlClient;
   twitter?: TwitterClient;
   forumScout?: ForumScoutClient;
   openai?: OpenAIClient;

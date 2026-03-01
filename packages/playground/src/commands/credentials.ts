@@ -36,6 +36,8 @@ const CREDENTIAL_SCHEMAS: Record<
     { name: 'login', message: 'DataForSEO Login:', type: 'input' },
     { name: 'password', message: 'DataForSEO Password:', type: 'password' },
   ],
+  discordbot: [{ name: 'botToken', message: 'Discord Bot Token:', type: 'password' }],
+  discordwebhook: [{ name: 'webhookUrl', message: 'Discord Webhook URL:', type: 'input' }],
 };
 
 /**

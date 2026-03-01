@@ -29,6 +29,10 @@ export type {
   LinkedInPost,
   OpenAIClient,
   AnthropicClient,
+  FirecrawlClient,
+  FirecrawlScrapeResult,
+  FirecrawlCrawlResult,
+  FirecrawlExtractResult,
   NotificationService,
   StorageService,
   CacheService,
@@ -62,3 +66,16 @@ export {
   defineBearerCredential,
   defineBasicCredential,
 } from './credentials.js';
+
+export type {
+  RetryConfig,
+  CacheStore,
+  CacheConfig,
+  ExecutionConfig,
+  WorkflowExecutionConfig,
+  WorkflowExecutionResult,
+  Workflow,
+  WorkflowNode,
+  WorkflowEdge,
+  NodeStatus,
+} from './execution.js';

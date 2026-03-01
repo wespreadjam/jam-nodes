@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { defineNode } from '@jam-nodes/core';
+import { resolvePath } from '../utils/resolve-path.js';
 
 /**
  * Filter operator schema
@@ -43,28 +44,6 @@ export const FilterOutputSchema = z.object({
 });
 
 export type FilterOutput = z.infer<typeof FilterOutputSchema>;
-
-/**
- * Resolve a nested path on an object
- */
-function resolvePath(obj: unknown, path: string): unknown {
-  // Empty path means use the item itself
-  if (!path) {
-    return obj;
-  }
-
-  const parts = path.split('.');
-  let current: unknown = obj;
-
-  for (const part of parts) {
-    if (current === null || current === undefined) {
-      return undefined;
-    }
-    current = (current as Record<string, unknown>)[part];
-  }
-
-  return current;
-}
 
 /**
  * Evaluate filter condition
