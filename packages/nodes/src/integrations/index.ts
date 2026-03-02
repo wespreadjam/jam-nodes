@@ -75,3 +75,22 @@ export {
   discordBotCredential,
   discordWebhookCredential,
 } from './discord/index.js';
+
+// Firecrawl integrations
+export {
+  firecrawlScrapeNode,
+  FirecrawlScrapeInputSchema,
+  FirecrawlScrapeOutputSchema,
+  type FirecrawlScrapeInput,
+  type FirecrawlScrapeOutput,
+  firecrawlCrawlNode,
+  FirecrawlCrawlInputSchema,
+  FirecrawlCrawlOutputSchema,
+  type FirecrawlCrawlInput,
+  type FirecrawlCrawlOutput,
+  firecrawlExtractNode,
+  FirecrawlExtractInputSchema,
+  FirecrawlExtractOutputSchema,
+  type FirecrawlExtractInput,
+  type FirecrawlExtractOutput,
+} from './firecrawl/index.js';
