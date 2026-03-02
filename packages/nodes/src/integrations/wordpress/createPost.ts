@@ -39,9 +39,11 @@ export const wordpressCreatePostNode = defineNode({
         content: input.content,
         status: input.status ?? 'draft',
       }
-      if (input.categories !== undefined) postBody['categories'] = input.categories
+      if (input.categories !== undefined)
+        postBody['categories'] = input.categories
       if (input.tags !== undefined) postBody['tags'] = input.tags
-      if (input.featuredMediaId !== undefined) postBody['featured_media'] = input.featuredMediaId
+      if (input.featuredMediaId !== undefined)
+        postBody['featured_media'] = input.featuredMediaId
       if (input.excerpt !== undefined) postBody['excerpt'] = input.excerpt
       if (input.slug !== undefined) postBody['slug'] = input.slug
 

@@ -60,6 +60,27 @@ export const WordPressGetPostsOutputSchema = z.object({
   }),
 })
 
+// ─── Upload media schemas ─────────────────────────────────────────────────────
+
+export const WordPressMediaSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  slug: z.string(),
+  status: z.string(),
+  link: z.string(),
+  sourceUrl: z.string(),
+  mediaType: z.string(),
+  mimeType: z.string(),
+})
+
+export const WordPressUploadMediaInputSchema = z.object({
+  filename: z.string().min(1),
+  mimeType: z.string().min(1),
+  contentBase64: z.string().min(1),
+})
+
+export const WordPressUploadMediaOutputSchema = WordPressMediaSchema
+
 // ─── Raw API response shape (internal use only) ───────────────────────────────
 
 export interface WordPressApiPost {
@@ -121,5 +142,16 @@ export type WordPressUpdatePostInput = z.infer<
 export type WordPressUpdatePostOutput = z.infer<
   typeof WordPressUpdatePostOutputSchema
 >
-export type WordPressGetPostsInput = z.infer<typeof WordPressGetPostsInputSchema>
-export type WordPressGetPostsOutput = z.infer<typeof WordPressGetPostsOutputSchema>
+export type WordPressGetPostsInput = z.infer<
+  typeof WordPressGetPostsInputSchema
+>
+export type WordPressGetPostsOutput = z.infer<
+  typeof WordPressGetPostsOutputSchema
+>
+export type WordPressMedia = z.infer<typeof WordPressMediaSchema>
+export type WordPressUploadMediaInput = z.infer<
+  typeof WordPressUploadMediaInputSchema
+>
+export type WordPressUploadMediaOutput = z.infer<
+  typeof WordPressUploadMediaOutputSchema
+>

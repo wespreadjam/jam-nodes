@@ -65,10 +65,7 @@ export const wordpressGetPostsNode = defineNode({
         }
       }
 
-      const totalFound = parseInt(
-        response.headers.get('X-WP-Total') ?? '0',
-        10,
-      )
+      const totalFound = parseInt(response.headers.get('X-WP-Total') ?? '0', 10)
       const data = (await response.json()) as WordPressApiPost[]
       const posts = data.map(normalizeWordPressPost)
 

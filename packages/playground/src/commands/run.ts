@@ -47,6 +47,7 @@ const NODE_CREDENTIAL_REQUIREMENTS: Record<string, { service: string; fields: { 
   wordpress_create_post: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
   wordpress_update_post: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
   wordpress_get_posts: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
+  wordpress_upload_media: [{ service: 'wordpress', fields: [{ name: 'siteUrl', envVar: 'WORDPRESS_SITE_URL' }, { name: 'username', envVar: 'WORDPRESS_USERNAME' }, { name: 'applicationPassword', envVar: 'WORDPRESS_APP_PASSWORD' }] }],
 };
 
 /**

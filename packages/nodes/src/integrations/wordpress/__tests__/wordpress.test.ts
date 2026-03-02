@@ -4,10 +4,13 @@ import {
   wordpressCreatePostNode,
   wordpressUpdatePostNode,
   wordpressGetPostsNode,
+  wordpressUploadMediaNode,
   WordPressCreatePostInputSchema,
   WordPressUpdatePostInputSchema,
   WordPressGetPostsInputSchema,
+  WordPressUploadMediaInputSchema,
   WordPressPostSchema,
+  WordPressMediaSchema,
   normalizeWordPressPost,
 } from '../index.js'
 
@@ -54,7 +57,9 @@ const mockContextSubpath = {
   },
 }
 
-const expectedBase64 = Buffer.from('admin:abcd 1234 efgh 5678').toString('base64')
+const expectedBase64 = Buffer.from('admin:abcd 1234 efgh 5678').toString(
+  'base64',
+)
 const expectedAuthHeader = `Basic ${expectedBase64}`
 
 afterEach(() => {
@@ -107,7 +112,9 @@ describe('wordpress schemas', () => {
   })
 
   it('WordPressCreatePostInputSchema rejects missing content', () => {
-    const result = WordPressCreatePostInputSchema.safeParse({ title: 'My Post' })
+    const result = WordPressCreatePostInputSchema.safeParse({
+      title: 'My Post',
+    })
     expect(result.success).toBe(false)
   })
 
@@ -134,7 +141,9 @@ describe('wordpress schemas', () => {
   })
 
   it('WordPressUpdatePostInputSchema requires postId', () => {
-    const result = WordPressUpdatePostInputSchema.safeParse({ title: 'Updated' })
+    const result = WordPressUpdatePostInputSchema.safeParse({
+      title: 'Updated',
+    })
     expect(result.success).toBe(false)
   })
 
@@ -185,7 +194,11 @@ describe('normalizeWordPressPost', () => {
   })
 
   it('omits content and excerpt when absent', () => {
-    const rawWithout = { ...mockRawPost, content: undefined, excerpt: undefined }
+    const rawWithout = {
+      ...mockRawPost,
+      content: undefined,
+      excerpt: undefined,
+    }
     const result = normalizeWordPressPost(rawWithout)
     expect(result.content).toBeUndefined()
     expect(result.excerpt).toBeUndefined()
@@ -573,5 +586,187 @@ describe('wordpressGetPostsNode', () => {
     const result = await wordpressGetPostsNode.executor({}, mockContext)
     expect(result.success).toBe(false)
     expect(result.error).toMatch('500')
+  })
+})
+
+// ─── wordpressUploadMedia ─────────────────────────────────────────────────────
+
+const mockRawMedia = {
+  id: 99,
+  title: { rendered: 'test-image' },
+  slug: 'test-image',
+  status: 'inherit',
+  link: 'https://example.com/?attachment_id=99',
+  source_url: 'https://example.com/wp-content/uploads/test-image.jpg',
+  media_type: 'image',
+  mime_type: 'image/jpeg',
+}
+
+describe('WordPressUploadMediaInputSchema', () => {
+  it('accepts valid input', () => {
+    const result = WordPressUploadMediaInputSchema.safeParse({
+      filename: 'photo.jpg',
+      mimeType: 'image/jpeg',
+      contentBase64: Buffer.from('fake-image-data').toString('base64'),
+    })
+    expect(result.success).toBe(true)
+  })
+
+  it('rejects missing filename', () => {
+    const result = WordPressUploadMediaInputSchema.safeParse({
+      mimeType: 'image/jpeg',
+      contentBase64: 'abc123',
+    })
+    expect(result.success).toBe(false)
+  })
+
+  it('rejects empty contentBase64', () => {
+    const result = WordPressUploadMediaInputSchema.safeParse({
+      filename: 'photo.jpg',
+      mimeType: 'image/jpeg',
+      contentBase64: '',
+    })
+    expect(result.success).toBe(false)
+  })
+})
+
+describe('wordpressUploadMediaNode', () => {
+  it('has correct type and category', () => {
+    expect(wordpressUploadMediaNode.type).toBe('wordpress_upload_media')
+    expect(wordpressUploadMediaNode.category).toBe('integration')
+  })
+
+  it('returns failure when credentials are missing', async () => {
+    const ctx = { ...mockContext, credentials: {} }
+    const result = await wordpressUploadMediaNode.executor(
+      {
+        filename: 'photo.jpg',
+        mimeType: 'image/jpeg',
+        contentBase64: 'abc123',
+      },
+      ctx,
+    )
+    expect(result.success).toBe(false)
+    expect(result.error).toMatch(/siteUrl/)
+    expect(result.error).toMatch(/applicationPassword/)
+  })
+
+  it('sends POST to correct media endpoint with Authorization header', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockRawMedia),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    await wordpressUploadMediaNode.executor(
+      {
+        filename: 'test-image.jpg',
+        mimeType: 'image/jpeg',
+        contentBase64: Buffer.from('fake').toString('base64'),
+      },
+      mockContext,
+    )
+
+    const [url, options] = mockFetch.mock.calls[0] as [string, RequestInit]
+    expect(url).toBe('https://example.com/wp-json/wp/v2/media')
+    expect(options.method).toBe('POST')
+    expect((options.headers as Record<string, string>)['Authorization']).toBe(
+      expectedAuthHeader,
+    )
+  })
+
+  it('sets Content-Disposition header with filename', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockRawMedia),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    await wordpressUploadMediaNode.executor(
+      {
+        filename: 'my-photo.jpg',
+        mimeType: 'image/jpeg',
+        contentBase64: Buffer.from('fake').toString('base64'),
+      },
+      mockContext,
+    )
+
+    const [, options] = mockFetch.mock.calls[0] as [string, RequestInit]
+    expect(
+      (options.headers as Record<string, string>)['Content-Disposition'],
+    ).toContain('my-photo.jpg')
+  })
+
+  it('returns normalized media output matching WordPressMediaSchema', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockRawMedia),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await wordpressUploadMediaNode.executor(
+      {
+        filename: 'test-image.jpg',
+        mimeType: 'image/jpeg',
+        contentBase64: Buffer.from('fake').toString('base64'),
+      },
+      mockContext,
+    )
+
+    expect(result.success).toBe(true)
+    if (result.success && result.output) {
+      const parsed = WordPressMediaSchema.safeParse(result.output)
+      expect(parsed.success).toBe(true)
+      const out = result.output as {
+        id: number
+        sourceUrl: string
+        mediaType: string
+      }
+      expect(out.id).toBe(99)
+      expect(out.sourceUrl).toBe(
+        'https://example.com/wp-content/uploads/test-image.jpg',
+      )
+      expect(out.mediaType).toBe('image')
+    }
+  })
+
+  it('strips trailing slash from siteUrl', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(mockRawMedia),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    await wordpressUploadMediaNode.executor(
+      {
+        filename: 'photo.jpg',
+        mimeType: 'image/jpeg',
+        contentBase64: Buffer.from('fake').toString('base64'),
+      },
+      mockContextSubpath,
+    )
+
+    const [url] = mockFetch.mock.calls[0] as [string]
+    expect(url).toBe('https://example.com/blog/wp-json/wp/v2/media')
+  })
+
+  it('returns failure on non-OK response', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 413,
+      text: () => Promise.resolve('Payload Too Large'),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await wordpressUploadMediaNode.executor(
+      {
+        filename: 'huge.jpg',
+        mimeType: 'image/jpeg',
+        contentBase64: Buffer.from('fake').toString('base64'),
+      },
+      mockContext,
+    )
+    expect(result.success).toBe(false)
+    expect(result.error).toMatch('413')
   })
 })

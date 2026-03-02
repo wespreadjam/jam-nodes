@@ -129,7 +129,11 @@ export {
   wordpressGetPostsNode,
   WordPressGetPostsInputSchema,
   WordPressGetPostsOutputSchema,
+  wordpressUploadMediaNode,
+  WordPressUploadMediaInputSchema,
+  WordPressUploadMediaOutputSchema,
   WordPressPostSchema,
+  WordPressMediaSchema,
   wordpressCredential,
 } from './integrations/index.js';
 
@@ -172,6 +176,9 @@ export type {
   WordPressUpdatePostOutput,
   WordPressGetPostsInput,
   WordPressGetPostsOutput,
+  WordPressMedia,
+  WordPressUploadMediaInput,
+  WordPressUploadMediaOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -225,6 +232,7 @@ import {
   wordpressCreatePostNode,
   wordpressUpdatePostNode,
   wordpressGetPostsNode,
+  wordpressUploadMediaNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -264,6 +272,7 @@ export const builtInNodes = [
   wordpressCreatePostNode,
   wordpressUpdatePostNode,
   wordpressGetPostsNode,
+  wordpressUploadMediaNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,
