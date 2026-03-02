@@ -26,7 +26,15 @@ const CREDENTIAL_SCHEMAS: Record<
   hubspot: [{ name: 'apiKey', message: 'HubSpot API Key:', type: 'password' }],
   clearbit: [{ name: 'apiKey', message: 'Clearbit API Key:', type: 'password' }],
   dropcontact: [{ name: 'apiKey', message: 'Dropcontact API Key:', type: 'password' }],
-  twitter: [{ name: 'bearerToken', message: 'Twitter Bearer Token:', type: 'password' }],
+  twitter: [
+    { name: 'consumerKey', message: 'Twitter Consumer Key (API Key):', type: 'input' },
+    { name: 'consumerSecret', message: 'Twitter Consumer Secret (API Secret):', type: 'password' },
+    { name: 'accessToken', message: 'Twitter Access Token:', type: 'password' },
+    { name: 'accessTokenSecret', message: 'Twitter Access Token Secret:', type: 'password' },
+    { name: 'bearerToken', message: 'Twitter Bearer Token (optional, read-only):', type: 'password' },
+    { name: 'clientId', message: 'Twitter Client ID (OAuth2, optional):', type: 'input' },
+    { name: 'clientSecret', message: 'Twitter Client Secret (OAuth2, optional):', type: 'password' },
+  ],
   linkedin: [{ name: 'accessToken', message: 'LinkedIn Access Token:', type: 'password' }],
   reddit: [
     { name: 'clientId', message: 'Reddit Client ID:', type: 'input' },

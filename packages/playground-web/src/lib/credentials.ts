@@ -111,7 +111,13 @@ export const CREDENTIAL_SCHEMAS: Record<
   hubspot: [{ name: 'apiKey', label: 'API Key', type: 'password' }],
   clearbit: [{ name: 'apiKey', label: 'API Key', type: 'password' }],
   dropcontact: [{ name: 'apiKey', label: 'API Key', type: 'password' }],
-  twitter: [{ name: 'bearerToken', label: 'Bearer Token', type: 'password' }],
+  twitter: [
+    { name: 'accessToken', label: 'Access Token', type: 'password' },
+    { name: 'refreshToken', label: 'Refresh Token', type: 'password' },
+    { name: 'clientId', label: 'Client ID', type: 'text' },
+    { name: 'clientSecret', label: 'Client Secret', type: 'password' },
+    { name: 'twitterApiIoKey', label: 'TwitterAPI.io Key', type: 'password' },
+  ],
   linkedin: [{ name: 'accessToken', label: 'Access Token', type: 'password' }],
   reddit: [
     { name: 'clientId', label: 'Client ID', type: 'text' },
