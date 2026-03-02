@@ -2,7 +2,7 @@ export { wordpressCreatePostNode } from './createPost.js'
 export { wordpressUpdatePostNode } from './updatePost.js'
 export { wordpressGetPostsNode } from './getPosts.js'
 export { wordpressUploadMediaNode } from './uploadMedia.js'
-export { wordpressCredential } from './credentials.js'
+export { WordPressCredential } from './credentials.js'
 export {
   WordPressPostSchema,
   WordPressCreatePostInputSchema,
@@ -15,6 +15,7 @@ export {
   WordPressUploadMediaInputSchema,
   WordPressUploadMediaOutputSchema,
   normalizeWordPressPost,
+  normalizeWordPressMedia,
 } from './schemas.js'
 export type {
   WordPressPost,

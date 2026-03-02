@@ -1,24 +1,16 @@
 import { defineNode } from '@jam-nodes/core'
 import { fetchWithRetry } from '../../utils/http.js'
+import { resolveWordPressAuth } from './utils.js'
 import {
   WordPressUploadMediaInputSchema,
   WordPressUploadMediaOutputSchema,
   type WordPressUploadMediaInput,
+  type WordPressApiMedia,
+  normalizeWordPressMedia,
 } from './schemas.js'
 
-interface WordPressApiMedia {
-  id: number
-  title: { rendered: string }
-  slug: string
-  status: string
-  link: string
-  source_url: string
-  media_type: string
-  mime_type: string
-}
-
 export const wordpressUploadMediaNode = defineNode({
-  type: 'wordpress_upload_media',
+  type: 'wordpressUploadMedia',
   name: 'WordPress Upload Media',
   description: 'Upload a media file to the WordPress media library',
   category: 'integration',
@@ -26,22 +18,15 @@ export const wordpressUploadMediaNode = defineNode({
   outputSchema: WordPressUploadMediaOutputSchema,
   estimatedDuration: 10,
   capabilities: {
-    supportsRerun: true,
+    supportsRerun: false,
   },
   executor: async (input: WordPressUploadMediaInput, context) => {
     try {
-      const creds = context.credentials?.wordpress
-      if (!creds?.siteUrl || !creds?.username || !creds?.applicationPassword) {
-        return {
-          success: false,
-          error:
-            'WordPress credentials not configured. Please provide context.credentials.wordpress with siteUrl, username, and applicationPassword.',
-        }
+      const authResult = resolveWordPressAuth(context.credentials?.wordpress)
+      if ('error' in authResult) {
+        return { success: false, error: authResult.error }
       }
-
-      const { siteUrl, username, applicationPassword } = creds
-      const baseUrl = siteUrl.replace(/\/+$/, '')
-      const authHeader = `Basic ${Buffer.from(`${username}:${applicationPassword}`).toString('base64')}`
+      const { baseUrl, authHeader } = authResult
 
       const fileBuffer = Buffer.from(input.contentBase64, 'base64')
       const formData = new FormData()
@@ -73,16 +58,7 @@ export const wordpressUploadMediaNode = defineNode({
 
       return {
         success: true,
-        output: {
-          id: data.id,
-          title: data.title.rendered,
-          slug: data.slug,
-          status: data.status,
-          link: data.link,
-          sourceUrl: data.source_url,
-          mediaType: data.media_type,
-          mimeType: data.mime_type,
-        },
+        output: normalizeWordPressMedia(data),
       }
     } catch (error) {
       return {

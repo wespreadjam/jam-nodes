@@ -134,7 +134,7 @@ export {
   WordPressUploadMediaOutputSchema,
   WordPressPostSchema,
   WordPressMediaSchema,
-  wordpressCredential,
+  WordPressCredential,
 } from './integrations/index.js';
 
 export type {

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
-  wordpressCredential,
+  WordPressCredential,
   wordpressCreatePostNode,
   wordpressUpdatePostNode,
   wordpressGetPostsNode,
@@ -71,12 +71,12 @@ afterEach(() => {
 
 describe('wordpress credential', () => {
   it('has correct metadata', () => {
-    expect(wordpressCredential.name).toBe('wordpress')
-    expect(wordpressCredential.type).toBe('basic')
+    expect(WordPressCredential.name).toBe('wordpress')
+    expect(WordPressCredential.type).toBe('basic')
   })
 
   it('schema requires siteUrl, username, applicationPassword', () => {
-    const ok = wordpressCredential.schema.safeParse({
+    const ok = WordPressCredential.schema.safeParse({
       siteUrl: 'https://example.com',
       username: 'admin',
       applicationPassword: 'secret',
@@ -85,12 +85,12 @@ describe('wordpress credential', () => {
   })
 
   it('schema rejects missing fields', () => {
-    const result = wordpressCredential.schema.safeParse({ username: 'admin' })
+    const result = WordPressCredential.schema.safeParse({ username: 'admin' })
     expect(result.success).toBe(false)
   })
 
   it('schema rejects invalid siteUrl', () => {
-    const result = wordpressCredential.schema.safeParse({
+    const result = WordPressCredential.schema.safeParse({
       siteUrl: 'not-a-url',
       username: 'admin',
       applicationPassword: 'secret',

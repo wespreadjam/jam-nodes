@@ -34,12 +34,12 @@ export const WordPressCreatePostInputSchema = z.object({
 export const WordPressUpdatePostInputSchema = z.object({
   postId: z.number().int().positive(),
   title: z.string().min(1).optional(),
-  content: z.string().optional(),
+  content: z.string().min(1).optional(),
   status: z.enum(['publish', 'draft', 'private', 'pending']).optional(),
 })
 
 export const WordPressGetPostsInputSchema = z.object({
-  status: z.string().optional(),
+  status: z.enum(['publish', 'draft', 'private', 'pending', 'future', 'trash', 'any']).optional(),
   perPage: z.number().int().min(1).max(100).optional(),
   page: z.number().int().positive().optional(),
   search: z.string().optional(),
@@ -99,6 +99,17 @@ export interface WordPressApiPost {
   excerpt?: { rendered: string }
 }
 
+export interface WordPressApiMedia {
+  id: number
+  title: { rendered: string }
+  slug: string
+  status: string
+  link: string
+  source_url: string
+  media_type: string
+  mime_type: string
+}
+
 // ─── Normalizer ───────────────────────────────────────────────────────────────
 
 /**
@@ -125,6 +136,22 @@ export function normalizeWordPressPost(raw: WordPressApiPost): WordPressPost {
     normalized.excerpt = raw.excerpt.rendered
   }
   return normalized
+}
+
+/**
+ * Normalize a raw WordPress REST API media response into the minimal output shape.
+ */
+export function normalizeWordPressMedia(raw: WordPressApiMedia): WordPressMedia {
+  return {
+    id: raw.id,
+    title: raw.title.rendered,
+    slug: raw.slug,
+    status: raw.status,
+    link: raw.link,
+    sourceUrl: raw.source_url,
+    mediaType: raw.media_type,
+    mimeType: raw.mime_type,
+  }
 }
 
 // ─── Type exports ─────────────────────────────────────────────────────────────

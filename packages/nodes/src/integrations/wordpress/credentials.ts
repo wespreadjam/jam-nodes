@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { defineBasicCredential } from '@jam-nodes/core'
 
-export const wordpressCredential = defineBasicCredential({
+export const WordPressCredential = defineBasicCredential({
   name: 'wordpress',
   displayName: 'WordPress Application Password',
   documentationUrl:

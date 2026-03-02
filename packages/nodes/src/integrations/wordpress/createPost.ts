@@ -1,5 +1,6 @@
 import { defineNode } from '@jam-nodes/core'
 import { fetchWithRetry } from '../../utils/http.js'
+import { resolveWordPressAuth } from './utils.js'
 import {
   WordPressCreatePostInputSchema,
   WordPressCreatePostOutputSchema,
@@ -9,7 +10,7 @@ import {
 } from './schemas.js'
 
 export const wordpressCreatePostNode = defineNode({
-  type: 'wordpress_create_post',
+  type: 'wordpressCreatePost',
   name: 'WordPress Create Post',
   description: 'Create a new post on WordPress (defaults to draft)',
   category: 'integration',
@@ -21,18 +22,11 @@ export const wordpressCreatePostNode = defineNode({
   },
   executor: async (input: WordPressCreatePostInput, context) => {
     try {
-      const creds = context.credentials?.wordpress
-      if (!creds?.siteUrl || !creds?.username || !creds?.applicationPassword) {
-        return {
-          success: false,
-          error:
-            'WordPress credentials not configured. Please provide context.credentials.wordpress with siteUrl, username, and applicationPassword.',
-        }
+      const authResult = resolveWordPressAuth(context.credentials?.wordpress)
+      if ('error' in authResult) {
+        return { success: false, error: authResult.error }
       }
-
-      const { siteUrl, username, applicationPassword } = creds
-      const baseUrl = siteUrl.replace(/\/+$/, '')
-      const authHeader = `Basic ${Buffer.from(`${username}:${applicationPassword}`).toString('base64')}`
+      const { baseUrl, authHeader } = authResult
 
       const postBody: Record<string, unknown> = {
         title: input.title,

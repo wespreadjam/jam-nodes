@@ -101,7 +101,7 @@ export {
   wordpressUpdatePostNode,
   wordpressGetPostsNode,
   wordpressUploadMediaNode,
-  wordpressCredential,
+  WordPressCredential,
   WordPressPostSchema,
   WordPressCreatePostInputSchema,
   WordPressCreatePostOutputSchema,
