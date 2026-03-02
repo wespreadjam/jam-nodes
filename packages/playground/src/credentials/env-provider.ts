@@ -43,7 +43,20 @@ const ENV_VAR_MAPPINGS: Record<string, string[]> = {
   sendgrid: ['JAM_SENDGRID_API_KEY', 'SENDGRID_API_KEY'],
   openai: ['JAM_OPENAI_API_KEY', 'OPENAI_API_KEY'],
   anthropic: ['JAM_ANTHROPIC_API_KEY', 'ANTHROPIC_API_KEY'],
-  twitter: ['JAM_TWITTER_BEARER_TOKEN', 'TWITTER_BEARER_TOKEN'],
+  twitter: [
+    'JAM_TWITTER_ACCESS_TOKEN',
+    'TWITTER_ACCESS_TOKEN',
+    'JAM_TWITTER_BEARER_TOKEN',
+    'TWITTER_BEARER_TOKEN',
+    'JAM_TWITTERAPI_IO_KEY',
+    'TWITTERAPI_IO_KEY',
+    'JAM_TWITTER_CONSUMER_KEY',
+    'TWITTER_CONSUMER_KEY',
+    'JAM_TWITTER_CONSUMER_SECRET',
+    'TWITTER_CONSUMER_SECRET',
+    'JAM_TWITTER_ACCESS_TOKEN_SECRET',
+    'TWITTER_ACCESS_TOKEN_SECRET',
+  ],
   reddit: ['JAM_REDDIT_CLIENT_ID', 'REDDIT_CLIENT_ID'],
   linkedin: ['JAM_LINKEDIN_ACCESS_TOKEN', 'LINKEDIN_ACCESS_TOKEN'],
   dataforseo: ['JAM_DATAFORSEO_LOGIN', 'DATAFORSEO_LOGIN'],
@@ -64,6 +77,32 @@ function getFromEnv(name: string): Record<string, string> | null {
     for (const varName of envVars) {
       const value = process.env[varName];
       if (value) {
+        if (name.toLowerCase() === 'twitter') {
+          const accessToken = process.env['JAM_TWITTER_ACCESS_TOKEN'] || process.env['TWITTER_ACCESS_TOKEN'];
+          const bearerToken = process.env['JAM_TWITTER_BEARER_TOKEN'] || process.env['TWITTER_BEARER_TOKEN'];
+          const twitterApiIoKey = process.env['JAM_TWITTERAPI_IO_KEY'] || process.env['TWITTERAPI_IO_KEY'];
+          const refreshToken = process.env['JAM_TWITTER_REFRESH_TOKEN'] || process.env['TWITTER_REFRESH_TOKEN'];
+          const clientId = process.env['JAM_TWITTER_CLIENT_ID'] || process.env['TWITTER_CLIENT_ID'];
+          const clientSecret = process.env['JAM_TWITTER_CLIENT_SECRET'] || process.env['TWITTER_CLIENT_SECRET'];
+          const consumerKey = process.env['JAM_TWITTER_CONSUMER_KEY'] || process.env['TWITTER_CONSUMER_KEY'];
+          const consumerSecret = process.env['JAM_TWITTER_CONSUMER_SECRET'] || process.env['TWITTER_CONSUMER_SECRET'];
+          const accessTokenSecret = process.env['JAM_TWITTER_ACCESS_TOKEN_SECRET'] || process.env['TWITTER_ACCESS_TOKEN_SECRET'];
+
+          const credentials: Record<string, string> = {};
+          if (accessToken) credentials['accessToken'] = accessToken;
+          if (bearerToken) credentials['bearerToken'] = bearerToken;
+          if (twitterApiIoKey) credentials['twitterApiIoKey'] = twitterApiIoKey;
+          if (refreshToken) credentials['refreshToken'] = refreshToken;
+          if (clientId) credentials['clientId'] = clientId;
+          if (clientSecret) credentials['clientSecret'] = clientSecret;
+          if (consumerKey) credentials['consumerKey'] = consumerKey;
+          if (consumerSecret) credentials['consumerSecret'] = consumerSecret;
+          if (accessTokenSecret) credentials['accessTokenSecret'] = accessTokenSecret;
+
+          if (Object.keys(credentials).length > 0) {
+            return credentials;
+          }
+        }
         if (name.toLowerCase() === 'discordbot') {
           return { botToken: value };
         }

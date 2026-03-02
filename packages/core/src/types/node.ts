@@ -16,10 +16,26 @@ export interface NodeCredentials {
   }
   /** Twitter/X API credentials */
   twitter?: {
+    /** OAuth2 client ID for PKCE flow */
+    clientId?: string;
+    /** OAuth2 client secret for token exchange/refresh */
+    clientSecret?: string;
+    /** OAuth2 access token used for Twitter API v2 operations */
+    accessToken?: string;
+    /** OAuth2 refresh token */
+    refreshToken?: string;
+    /** Access token expiration timestamp (unix ms) */
+    expiresAt?: number;
     /** Official Twitter API v2 Bearer Token */
     bearerToken?: string;
     /** TwitterAPI.io API key (third-party, simpler) */
     twitterApiIoKey?: string;
+    /** OAuth 1.0a Consumer Key (API Key) */
+    consumerKey?: string;
+    /** OAuth 1.0a Consumer Secret (API Secret) */
+    consumerSecret?: string;
+    /** OAuth 1.0a Access Token Secret */
+    accessTokenSecret?: string;
   };
   /** ForumScout API credentials (for LinkedIn monitoring) */
   forumScout?: {
