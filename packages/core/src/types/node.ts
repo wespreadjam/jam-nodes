@@ -1,5 +1,5 @@
-import type { z } from 'zod';
-import type { NodeServices } from './services.js';
+import type { z } from 'zod'
+import type { NodeServices } from './services.js'
 
 /**
  * Credentials for API authentication.
@@ -8,44 +8,48 @@ import type { NodeServices } from './services.js';
 export interface NodeCredentials {
   /** Apollo.io API credentials */
   apollo?: {
-    apiKey: string;
-  };
+    apiKey: string
+  }
   /** Firecrawl API credentials  */
   firecrawl?: {
-    bearerToken?: string;
+    bearerToken?: string
   }
   /** Twitter/X API credentials */
   twitter?: {
     /** Official Twitter API v2 Bearer Token */
-    bearerToken?: string;
+    bearerToken?: string
     /** TwitterAPI.io API key (third-party, simpler) */
-    twitterApiIoKey?: string;
-  };
+    twitterApiIoKey?: string
+  }
   /** ForumScout API credentials (for LinkedIn monitoring) */
   forumScout?: {
-    apiKey: string;
-  };
+    apiKey: string
+  }
   /** DataForSEO API credentials */
   dataForSeo?: {
     /** Base64 encoded login:password */
-    apiToken: string;
-  };
+    apiToken: string
+  }
   /** OpenAI API credentials */
   openai?: {
-    apiKey: string;
-  };
+    apiKey: string
+  }
   /** Anthropic API credentials */
   anthropic?: {
-    apiKey: string;
-  };
+    apiKey: string
+  }
   /** Discord Bot credentials */
   discordBot?: {
-    botToken: string;
-  };
+    botToken: string
+  }
   /** Discord Webhook credentials */
   discordWebhook?: {
-    webhookUrl: string;
-  };
+    webhookUrl: string
+  }
+  /** Dev.to API credentials */
+  devto?: {
+    apiKey: string
+  }
 }
 
 /**
@@ -54,22 +58,22 @@ export interface NodeCredentials {
  */
 export interface NodeExecutionContext {
   /** User ID executing the workflow */
-  userId: string;
+  userId: string
   /** Optional campaign/project context */
-  campaignId?: string;
+  campaignId?: string
   /** Unique identifier for this workflow execution */
-  workflowExecutionId: string;
+  workflowExecutionId: string
   /** Variables from previous node outputs */
-  variables: Record<string, unknown>;
+  variables: Record<string, unknown>
   /** Resolve nested path like "contact.email" or "data[0].name" */
-  resolveNestedPath: (path: string) => unknown;
+  resolveNestedPath: (path: string) => unknown
   /** API credentials for direct HTTP calls */
-  credentials?: NodeCredentials;
+  credentials?: NodeCredentials
   /**
    * Optional services injected by host application.
    * @deprecated Use credentials instead for standalone operation.
    */
-  services?: NodeServices;
+  services?: NodeServices
 }
 
 /**
@@ -77,13 +81,13 @@ export interface NodeExecutionContext {
  */
 export interface NodeApprovalRequest {
   /** IDs of resources needing approval */
-  resourceIds: string[];
+  resourceIds: string[]
   /** Type of resource for UI display */
-  resourceType: string;
+  resourceType: string
   /** Optional message to display to approver */
-  message?: string;
+  message?: string
   /** Component to use for displaying approval details */
-  detailComponent?: string;
+  detailComponent?: string
 }
 
 /**
@@ -92,21 +96,21 @@ export interface NodeApprovalRequest {
  */
 export interface NodeExecutionResult<TOutput = unknown> {
   /** Whether execution succeeded */
-  success: boolean;
+  success: boolean
   /** Output data on success */
-  output?: TOutput;
+  output?: TOutput
   /** Error message on failure */
-  error?: string;
+  error?: string
   /** Next node ID for conditional branching */
-  nextNodeId?: string;
+  nextNodeId?: string
   /** Approval request if node needs user approval */
-  needsApproval?: NodeApprovalRequest;
+  needsApproval?: NodeApprovalRequest
   /** Notification to send to user */
   notification?: {
-    title: string;
-    message: string;
-    data?: Record<string, unknown>;
-  };
+    title: string
+    message: string
+    data?: Record<string, unknown>
+  }
 }
 
 /**
@@ -117,46 +121,46 @@ export interface NodeExecutionResult<TOutput = unknown> {
  */
 export type NodeExecutor<TInput = unknown, TOutput = unknown> = (
   input: TInput,
-  context: NodeExecutionContext
-) => Promise<NodeExecutionResult<TOutput>>;
+  context: NodeExecutionContext,
+) => Promise<NodeExecutionResult<TOutput>>
 
 /**
  * Node capabilities for UI and runtime behavior.
  */
 export interface NodeCapabilities {
   /** Node supports data enrichment */
-  supportsEnrichment?: boolean;
+  supportsEnrichment?: boolean
   /** Node supports bulk actions */
-  supportsBulkActions?: boolean;
+  supportsBulkActions?: boolean
   /** Node supports approval workflow */
-  supportsApproval?: boolean;
+  supportsApproval?: boolean
   /** Node can be re-run after completion */
-  supportsRerun?: boolean;
+  supportsRerun?: boolean
   /** Node supports cancellation */
-  supportsCancel?: boolean;
+  supportsCancel?: boolean
 }
 
 /**
  * Node category for organization.
  */
-export type NodeCategory = 'action' | 'logic' | 'integration' | 'transform';
+export type NodeCategory = 'action' | 'logic' | 'integration' | 'transform'
 
 /**
  * Metadata about a node (safe for client-side use).
  */
 export interface NodeMetadata {
   /** Unique node type identifier */
-  type: string;
+  type: string
   /** Display name */
-  name: string;
+  name: string
   /** Description of what the node does */
-  description: string;
+  description: string
   /** Category for grouping */
-  category: NodeCategory;
+  category: NodeCategory
   /** Estimated duration in seconds */
-  estimatedDuration?: number;
+  estimatedDuration?: number
   /** Node capabilities */
-  capabilities?: NodeCapabilities;
+  capabilities?: NodeCapabilities
 }
 
 /**
@@ -164,12 +168,14 @@ export interface NodeMetadata {
  * @template TInput - Input type
  * @template TOutput - Output type
  */
-export interface NodeDefinition<TInput = unknown, TOutput = unknown>
-  extends NodeMetadata {
+export interface NodeDefinition<
+  TInput = unknown,
+  TOutput = unknown,
+> extends NodeMetadata {
   /** Zod schema for validating input */
-  inputSchema: z.ZodSchema<TInput>;
+  inputSchema: z.ZodSchema<TInput>
   /** Zod schema for validating output */
-  outputSchema: z.ZodSchema<TOutput>;
+  outputSchema: z.ZodSchema<TOutput>
   /** Executor function */
-  executor: NodeExecutor<TInput, TOutput>;
+  executor: NodeExecutor<TInput, TOutput>
 }
