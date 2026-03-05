@@ -3,6 +3,7 @@ export {
   conditionalNode,
   endNode,
   delayNode,
+  rateLimiterNode,
   ConditionalInputSchema,
   ConditionalOutputSchema,
   ConditionSchema,
@@ -11,6 +12,8 @@ export {
   EndOutputSchema,
   DelayInputSchema,
   DelayOutputSchema,
+  RateLimiterInputSchema,
+  RateLimiterOutputSchema,
 } from './logic/index.js'
 
 export type {
@@ -22,6 +25,8 @@ export type {
   EndOutput,
   DelayInput,
   DelayOutput,
+  RateLimiterInput,
+  RateLimiterOutput,
 } from './logic/index.js'
 
 // Transform nodes
@@ -268,6 +273,7 @@ export type {
 import { conditionalNode } from './logic/index.js'
 import { endNode } from './logic/index.js'
 import { delayNode } from './logic/index.js'
+import { rateLimiterNode } from './logic/index.js'
 import { mapNode, filterNode, sortNode } from './transform/index.js'
 import { httpRequestNode, breadNode } from './examples/index.js'
 import {
@@ -313,6 +319,7 @@ export const builtInNodes = [
   conditionalNode,
   endNode,
   delayNode,
+  rateLimiterNode,
   // Transform
   mapNode,
   filterNode,
