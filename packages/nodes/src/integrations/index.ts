@@ -78,6 +78,21 @@ export {
   type SeoAuditInput,
   type SeoAuditOutput,
   type SeoIssue,
+  dataforseoGetBacklinksNode,
+  DataforseoGetBacklinksInputSchema,
+  DataforseoGetBacklinksOutputSchema,
+  type DataforseoGetBacklinksInput,
+  type DataforseoGetBacklinksOutput,
+  dataforseoPeopleAlsoAskNode,
+  DataforseoPeopleAlsoAskInputSchema,
+  DataforseoPeopleAlsoAskOutputSchema,
+  type DataforseoPeopleAlsoAskInput,
+  type DataforseoPeopleAlsoAskOutput,
+  dataforseoSerpNode,
+  DataforseoSerpInputSchema,
+  DataforseoSerpOutputSchema,
+  type DataforseoSerpInput,
+  type DataforseoSerpOutput,
 } from './dataforseo/index.js'
 
 // Apollo integrations
