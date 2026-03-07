@@ -38,5 +38,10 @@
   },
   "devDependencies": {
     "tsx": "^4.21.0"
+  },
+  "dependencies": {
+    "@jam-nodes/core": "^0.2.5",
+    "@jam-nodes/nodes": "^0.2.5",
+    "zod": "^4.3.6"
   }
 }
