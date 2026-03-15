@@ -96,6 +96,19 @@ export {
   searchContactsNode,
   SearchContactsInputSchema,
   SearchContactsOutputSchema,
+  // Google Sheets
+  googleSheetsAppendNode,
+  googleSheetsClearNode,
+  googleSheetsReadNode,
+  googleSheetsUpdateNode,
+  appendInputSchema,
+  appendOutputSchema,
+  clearInputSchema,
+  clearOutputSchema,
+  readInputSchema,
+  readOutputSchema,
+  updateInputSchema,
+  updateOutputSchema,
 } from './integrations/index.js';
 
 export type {
@@ -117,6 +130,15 @@ export type {
   SeoIssue,
   SearchContactsInput,
   SearchContactsOutput,
+  // Google Sheets
+  AppendInput,
+  AppendOutput,
+  ClearInput,
+  ClearOutput,
+  ReadInput,
+  ReadOutput,
+  UpdateInput,
+  UpdateOutput,
 } from './integrations/index.js';
 
 // AI nodes
@@ -161,6 +183,10 @@ import {
   seoKeywordResearchNode,
   seoAuditNode,
   searchContactsNode,
+  googleSheetsAppendNode,
+  googleSheetsClearNode,
+  googleSheetsReadNode,
+  googleSheetsUpdateNode,
 } from './integrations/index.js';
 import {
   socialKeywordGeneratorNode,
@@ -191,6 +217,11 @@ export const builtInNodes = [
   seoKeywordResearchNode,
   seoAuditNode,
   searchContactsNode,
+  // Google Sheets
+  googleSheetsAppendNode,
+  googleSheetsClearNode,
+  googleSheetsReadNode,
+  googleSheetsUpdateNode,
   // AI
   socialKeywordGeneratorNode,
   draftEmailsNode,

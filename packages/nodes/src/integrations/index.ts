@@ -52,3 +52,27 @@ export {
   type SearchContactsInput,
   type SearchContactsOutput,
 } from './apollo/index.js';
+
+// Google Sheets integrations
+export {
+  googleSheetsAppendNode,
+  googleSheetsClearNode,
+  googleSheetsReadNode,
+  googleSheetsUpdateNode,
+  appendInputSchema,
+  appendOutputSchema,
+  clearInputSchema,
+  clearOutputSchema,
+  readInputSchema,
+  readOutputSchema,
+  updateInputSchema,
+  updateOutputSchema,
+  type AppendInput,
+  type AppendOutput,
+  type ClearInput,
+  type ClearOutput,
+  type ReadInput,
+  type ReadOutput,
+  type UpdateInput,
+  type UpdateOutput,
+} from './google-sheets/index.js';
