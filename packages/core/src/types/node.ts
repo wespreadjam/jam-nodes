@@ -72,6 +72,10 @@ export interface NodeCredentials {
     username: string
     applicationPassword: string
   }
+  /** Apify API credentials */
+  apify?: {
+    apiToken: string
+  }
 }
 
 /**

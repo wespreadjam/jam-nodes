@@ -198,3 +198,23 @@ export {
   type WordPressUploadMediaInput,
   type WordPressUploadMediaOutput,
 } from './wordpress/index.js'
+
+// Apify integrations
+export {
+  apifyRunActorNode,
+  ApifyRunActorInputSchema,
+  ApifyRunActorOutputSchema,
+  type ApifyRunActorInput,
+  type ApifyRunActorOutput,
+  apifyGetDatasetNode,
+  ApifyGetDatasetInputSchema,
+  ApifyGetDatasetOutputSchema,
+  type ApifyGetDatasetInput,
+  type ApifyGetDatasetOutput,
+  apifyGetRunStatusNode,
+  ApifyGetRunStatusInputSchema,
+  ApifyGetRunStatusOutputSchema,
+  type ApifyGetRunStatusInput,
+  type ApifyGetRunStatusOutput,
+  apifyCredential,
+} from './apify/index.js'
