@@ -56,6 +56,8 @@ export type {
   RetryConfig,
   CacheStore,
   CacheConfig,
+  RateLimitStore,
+  RateLimitConfig,
   ExecutionConfig,
   WorkflowExecutionConfig,
   WorkflowExecutionResult,
@@ -81,6 +83,7 @@ export {
   executeNode,
   executeWorkflow,
   MemoryCacheStore,
+  MemoryRateLimitStore,
 } from './execution/index.js';
 
 // Registry

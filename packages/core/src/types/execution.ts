@@ -41,12 +41,40 @@ export interface CacheConfig {
 }
 
 /**
+ * Interface for pluggable rate-limit state backends.
+ * Tracks request timestamps per key to enforce windowed limits.
+ */
+export interface RateLimitStore {
+  /** Record a request timestamp for the given key */
+  record(key: string): Promise<void>;
+  /** Get the number of requests within the current window for the given key */
+  getCount(key: string, windowMs: number): Promise<number>;
+  /** Get the oldest timestamp in the current window (for calculating wait time) */
+  getOldestInWindow(key: string, windowMs: number): Promise<number | undefined>;
+}
+
+/**
+ * Configuration for rate-limiting node execution.
+ */
+export interface RateLimitConfig {
+  /** Maximum requests allowed within the time window */
+  maxRequests: number;
+  /** Time window in milliseconds */
+  windowMs: number;
+  /** Rate limit state backend */
+  store: RateLimitStore;
+  /** Custom function to derive a rate-limit key from the node input (default: returns 'default') */
+  keyFn?: (input: unknown) => string;
+}
+
+/**
  * Configuration for a single node execution.
- * Controls retry, caching, timeout, and cancellation.
+ * Controls retry, caching, rate-limiting, timeout, and cancellation.
  */
 export interface ExecutionConfig {
   retry?: RetryConfig;
   cache?: CacheConfig;
+  rateLimit?: RateLimitConfig;
   /** Maximum execution time per attempt in milliseconds */
   timeout?: number;
   /** AbortSignal for cancellation */

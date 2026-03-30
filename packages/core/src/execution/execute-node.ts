@@ -1,5 +1,5 @@
 import type { NodeDefinition, NodeExecutionContext, NodeExecutionResult } from '../types/node.js';
-import type { ExecutionConfig } from '../types/execution.js';
+import type { ExecutionConfig, RateLimitConfig } from '../types/execution.js';
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -24,6 +24,10 @@ export async function executeNode<TInput, TOutput>(
   config?: ExecutionConfig,
 ): Promise<NodeExecutionResult<TOutput>> {
   const validatedInput = node.inputSchema.parse(input) as TInput;
+
+  if (config?.rateLimit) {
+    await waitForRateLimit(validatedInput, config.rateLimit);
+  }
 
   if (config?.cache?.enabled) {
     const { store, ttlMs, keyFn } = config.cache;
@@ -147,4 +151,26 @@ async function executeWithTimeout<TInput, TOutput>(
   } finally {
     if (timeoutId) clearTimeout(timeoutId);
   }
+}
+
+async function waitForRateLimit(
+  input: unknown,
+  config: RateLimitConfig,
+): Promise<void> {
+  const key = (config.keyFn ?? (() => 'default'))(input);
+
+  while (true) {
+    const count = await config.store.getCount(key, config.windowMs);
+    if (count < config.maxRequests) break;
+
+    const oldest = await config.store.getOldestInWindow(key, config.windowMs);
+    if (oldest === undefined) break;
+
+    const waitMs = oldest + config.windowMs - Date.now();
+    if (waitMs > 0) {
+      await sleep(waitMs);
+    }
+  }
+
+  await config.store.record(key);
 }

@@ -167,6 +167,7 @@ function extractBaseConfig(config: WorkflowExecutionConfig): ExecutionConfig {
   return {
     retry: config.retry,
     cache: config.cache,
+    rateLimit: config.rateLimit,
     timeout: config.timeout,
     signal: config.signal,
     onRetry: config.onRetry,

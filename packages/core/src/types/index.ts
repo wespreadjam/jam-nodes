@@ -71,6 +71,8 @@ export type {
   RetryConfig,
   CacheStore,
   CacheConfig,
+  RateLimitStore,
+  RateLimitConfig,
   ExecutionConfig,
   WorkflowExecutionConfig,
   WorkflowExecutionResult,
