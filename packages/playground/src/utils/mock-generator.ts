@@ -128,28 +128,33 @@ export function generateMockOutput(
       selectedBranch: 'true',
     },
     end: {
-      terminated: true,
-      reason: 'Workflow completed successfully',
+      completed: true,
+      message: 'Workflow completed successfully',
     },
     delay: {
-      delayed: true,
-      delayMs: 1000,
+      waited: true,
+      actualDurationMs: 1000,
+      message: 'Waited for 1000ms',
     },
     map: {
-      result: [
+      results: [
         { transformed: 'item1' },
         { transformed: 'item2' },
       ],
+      count: 2,
     },
     filter: {
-      result: [{ passes: true }],
+      results: [{ passes: true }],
+      count: 1,
       originalCount: 3,
-      filteredCount: 1,
     },
     http_request: {
       status: 200,
-      data: { message: 'Mock response' },
+      statusText: 'OK',
       headers: { 'content-type': 'application/json' },
+      body: { message: 'Mock response' },
+      ok: true,
+      durationMs: 42,
     },
     search_contacts: {
       contacts: [
@@ -182,11 +187,19 @@ export function generateMockOutput(
       posts: [
         {
           id: 'mock_post_1',
-          title: 'Mock Reddit Post',
-          author: 'mock_user',
-          subreddit: 'technology',
-          score: 150,
+          platform: 'reddit',
           url: 'https://reddit.com/r/technology/mock',
+          text: 'Mock Reddit post content',
+          title: 'Mock Reddit Post',
+          authorName: 'mock_user',
+          authorHandle: 'u/mock_user',
+          authorUrl: 'https://reddit.com/u/mock_user',
+          subreddit: 'technology',
+          engagement: {
+            likes: 150,
+            comments: 25,
+            shares: 10,
+          },
           createdAt: new Date().toISOString(),
         },
       ],
@@ -195,26 +208,52 @@ export function generateMockOutput(
       posts: [
         {
           id: 'mock_tweet_1',
+          platform: 'twitter',
+          url: 'https://twitter.com/mockuser/status/mock_tweet_1',
           text: 'Mock tweet content',
-          author: 'mockuser',
-          likes: 50,
-          retweets: 10,
+          authorName: 'Mock User',
+          authorHandle: '@mockuser',
+          authorUrl: 'https://twitter.com/mockuser',
+          authorFollowers: 1000,
+          engagement: {
+            likes: 50,
+            comments: 5,
+            shares: 10,
+            views: 500,
+          },
           createdAt: new Date().toISOString(),
         },
       ],
     },
     social_keyword_generator: {
-      keywords: ['ai', 'machine learning', 'automation', 'workflow'],
-      hashtags: ['#AI', '#ML', '#Automation'],
+      topic: 'AI automation',
+      twitter: {
+        keywords: ['ai', 'machine learning', 'automation'],
+        searchQuery: 'ai OR "machine learning" OR automation',
+      },
+      reddit: {
+        keywords: ['artificial intelligence', 'ML', 'workflow automation'],
+      },
+      linkedin: {
+        keywords: ['AI', 'enterprise automation'],
+        searchQueries: ['AI automation tools', 'machine learning workflow'],
+      },
+      allKeywords: ['ai', 'machine learning', 'automation', 'workflow'],
     },
     draft_emails: {
-      drafts: [
+      emails: [
         {
-          to: 'john.doe@example.com',
+          id: 'draft-mock-1',
+          toEmail: 'john.doe@example.com',
+          toName: 'John Doe',
+          toCompany: 'Example Corp',
+          toTitle: 'CTO',
           subject: 'Mock Email Subject',
           body: 'This is a mock email body for testing purposes.',
+          status: 'draft',
         },
       ],
+      draftedCount: 1,
     },
   };
 
