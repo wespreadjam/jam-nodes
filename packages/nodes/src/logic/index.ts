@@ -24,4 +24,6 @@ export { webhookTriggerNode } from './webhook-trigger.js';
 export { WebhookTriggerInputSchema, WebhookTriggerOutputSchema } from './webhook-trigger.js';
 export type { WebhookTriggerInput, WebhookTriggerOutput } from './webhook-trigger.js';
 
-
+export { loopNode } from './loop.js';
+export type { LoopInput, LoopOutput, LoopError } from './loop.js';
+export { LoopInputSchema, LoopOutputSchema, LoopErrorSchema } from './loop.js';

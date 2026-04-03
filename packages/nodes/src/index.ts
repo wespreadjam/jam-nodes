@@ -4,6 +4,7 @@ export {
   endNode,
   delayNode,
   webhookTriggerNode,
+  loopNode,
   ConditionalInputSchema,
   ConditionalOutputSchema,
   ConditionSchema,
@@ -14,6 +15,9 @@ export {
   DelayOutputSchema,
   WebhookTriggerInputSchema,
   WebhookTriggerOutputSchema,
+  LoopInputSchema,
+  LoopOutputSchema,
+  LoopErrorSchema,
 } from './logic/index.js'
 
 export type {
@@ -27,6 +31,9 @@ export type {
   DelayOutput,
   WebhookTriggerInput,
   WebhookTriggerOutput,
+  LoopInput,
+  LoopOutput,
+  LoopError,
 } from './logic/index.js'
 
 // Transform nodes
@@ -311,6 +318,7 @@ import { conditionalNode } from './logic/index.js'
 import { endNode } from './logic/index.js'
 import { delayNode } from './logic/index.js'
 import { webhookTriggerNode } from './logic/index.js'
+import { loopNode } from './logic/index.js'
 import { mapNode, filterNode, sortNode } from './transform/index.js'
 import { httpRequestNode, breadNode } from './examples/index.js'
 import {
@@ -364,6 +372,7 @@ export const builtInNodes = [
   endNode,
   delayNode,
   webhookTriggerNode,
+  loopNode,
   // Transform
   mapNode,
   filterNode,
