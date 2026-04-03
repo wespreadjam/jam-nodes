@@ -26,7 +26,7 @@ Thank you for your interest in contributing to jam-nodes! This guide will help y
 
 ```bash
 # Clone the repository
-git clone https://github.com/anthropics/jam-nodes.git
+git clone https://github.com/wespreadjam/jam-nodes.git
 cd jam-nodes
 
 # Install dependencies
@@ -68,7 +68,6 @@ jam-nodes/
 │           ├── utils/           # HTTP utilities (fetchWithRetry, etc.)
 │           └── examples/        # Example nodes
 │
-├── GITHUB_ISSUES.md             # Detailed specs for planned nodes
 └── CONTRIBUTING.md              # This file
 ```
 
@@ -161,7 +160,7 @@ This provides:
 
 ### Step 1: Choose a Node to Implement
 
-Check [GITHUB_ISSUES.md](./GITHUB_ISSUES.md) for detailed specs on planned nodes. Each issue includes:
+Check the [GitHub Issues page](https://github.com/wespreadjam/jam-nodes/issues) for detailed specs on planned nodes. Each issue includes:
 - Input/output schemas
 - Credential requirements
 - API documentation links
@@ -527,7 +526,7 @@ feat(nodes): add Hunter.io email finder integration
 
 ## Questions?
 
-- Check [GITHUB_ISSUES.md](./GITHUB_ISSUES.md) for detailed specs
+- Check the [GitHub Issues page](https://github.com/wespreadjam/jam-nodes/issues) for detailed specs
 - Open an issue for discussion
 - Join our Discord community (coming soon)
 
