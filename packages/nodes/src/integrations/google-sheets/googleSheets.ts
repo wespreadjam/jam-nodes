@@ -1,4 +1,4 @@
-import { defineOAuth2Credential } from '../types/credentials.js';
+import { defineOAuth2Credential } from '@jam-nodes/core';
 import { z } from 'zod';
 
 export const GoogleSheetsCredential = defineOAuth2Credential({
