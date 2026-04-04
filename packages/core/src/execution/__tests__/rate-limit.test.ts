@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { z } from 'zod';
 import { executeNode } from '../execute-node.js';
 import { MemoryRateLimitStore } from '../memory-rate-limit-store.js';
