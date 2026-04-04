@@ -27,10 +27,9 @@ jam-nodes is an extensible, type-safe workflow node framework for building autom
 \`\`\`
 @jam-nodes/core     → Types, NodeRegistry, ExecutionContext, defineNode utility
 @jam-nodes/nodes    → Built-in node definitions (logic, transform, AI, integrations)
-@jam-nodes/editor   → React visual editor, WorkflowRunner, schema introspection
 \`\`\`
 
-**core** is dependency-free (except Zod + jsonpath-plus). **nodes** depends on core. **editor** depends on core + React + @xyflow/react.
+**core** is dependency-free (except Zod + jsonpath-plus). **nodes** depends on core.
 
 ## Quick Start
 
@@ -729,19 +728,67 @@ export interface NodeInfo {
 }
 
 const NODE_TYPES: NodeInfo[] = [
+  // Logic
   { type: 'conditional', name: 'Conditional', category: 'logic', description: 'Branch workflow based on a condition', fullDoc: '' },
   { type: 'end', name: 'End', category: 'logic', description: 'Mark the end of a workflow branch', fullDoc: '' },
   { type: 'delay', name: 'Delay', category: 'logic', description: 'Pause workflow execution for a specified duration', fullDoc: '' },
+  { type: 'webhook_trigger', name: 'Webhook Trigger', category: 'logic', description: 'Receive and validate incoming webhook payloads', fullDoc: '' },
+  // Transform
   { type: 'map', name: 'Map', category: 'transform', description: 'Extract a property from each item in an array', fullDoc: '' },
   { type: 'filter', name: 'Filter', category: 'transform', description: 'Filter items in an array based on a condition', fullDoc: '' },
+  { type: 'sort', name: 'Sort', category: 'transform', description: 'Sort array items by a property', fullDoc: '' },
+  // Examples
   { type: 'http_request', name: 'HTTP Request', category: 'integration', description: 'Make HTTP requests to external APIs', fullDoc: '' },
+  { type: 'bread', name: 'Bread', category: 'integration', description: 'Simple demo node returning a greeting', fullDoc: '' },
+  // Social
   { type: 'reddit_monitor', name: 'Reddit Monitor', category: 'integration', description: 'Search Reddit for posts matching keywords', fullDoc: '' },
   { type: 'twitter_monitor', name: 'Twitter Monitor', category: 'integration', description: 'Search Twitter/X for posts matching keywords', fullDoc: '' },
+  { type: 'twitter_create_tweet', name: 'Twitter Create Tweet', category: 'integration', description: 'Post a new tweet on Twitter/X', fullDoc: '' },
+  { type: 'twitter_delete_tweet', name: 'Twitter Delete Tweet', category: 'integration', description: 'Delete a tweet by ID', fullDoc: '' },
+  { type: 'twitter_like_tweet', name: 'Twitter Like Tweet', category: 'integration', description: 'Like a tweet by ID', fullDoc: '' },
+  { type: 'twitter_retweet', name: 'Twitter Retweet', category: 'integration', description: 'Retweet a tweet by ID', fullDoc: '' },
+  { type: 'twitter_search_tweets', name: 'Twitter Search Tweets', category: 'integration', description: 'Search tweets by query', fullDoc: '' },
+  { type: 'twitter_send_dm', name: 'Twitter Send DM', category: 'integration', description: 'Send a direct message on Twitter/X', fullDoc: '' },
+  { type: 'twitter_get_user_by_username', name: 'Twitter Get User', category: 'integration', description: 'Look up a Twitter/X user by username', fullDoc: '' },
   { type: 'linkedin_monitor', name: 'LinkedIn Monitor', category: 'integration', description: 'Search LinkedIn for posts via ForumScout API', fullDoc: '' },
+  // OpenAI
   { type: 'sora_video', name: 'Sora Video', category: 'integration', description: 'Generate AI video using OpenAI Sora 2', fullDoc: '' },
+  // DataForSEO
   { type: 'seo_keyword_research', name: 'SEO Keyword Research', category: 'integration', description: 'Research keywords with search volume, difficulty, CPC, and intent data', fullDoc: '' },
   { type: 'seo_audit', name: 'SEO Audit', category: 'integration', description: 'Run comprehensive SEO audit on a URL', fullDoc: '' },
+  { type: 'dataforseo_get_backlinks', name: 'DataForSEO Backlinks', category: 'integration', description: 'Get backlink data for a domain or URL', fullDoc: '' },
+  { type: 'dataforseo_people_also_ask', name: 'DataForSEO People Also Ask', category: 'integration', description: 'Get People Also Ask questions for a keyword', fullDoc: '' },
+  { type: 'dataforseo_serp', name: 'DataForSEO SERP', category: 'integration', description: 'Get SERP results for a keyword', fullDoc: '' },
+  // Apollo
   { type: 'search_contacts', name: 'Search Contacts', category: 'integration', description: 'Search for contacts using Apollo.io with email enrichment', fullDoc: '' },
+  // Discord
+  { type: 'discord_send_message', name: 'Discord Send Message', category: 'integration', description: 'Send a message to a Discord channel via bot', fullDoc: '' },
+  { type: 'discord_send_webhook', name: 'Discord Send Webhook', category: 'integration', description: 'Send a message via Discord webhook', fullDoc: '' },
+  { type: 'discord_create_thread', name: 'Discord Create Thread', category: 'integration', description: 'Create a thread in a Discord channel', fullDoc: '' },
+  // Firecrawl
+  { type: 'firecrawl_scrape', name: 'Firecrawl Scrape', category: 'integration', description: 'Scrape a single URL with AI-powered extraction', fullDoc: '' },
+  { type: 'firecrawl_crawl', name: 'Firecrawl Crawl', category: 'integration', description: 'Crawl a website and extract content from multiple pages', fullDoc: '' },
+  { type: 'firecrawl_extract', name: 'Firecrawl Extract', category: 'integration', description: 'Extract structured data from URLs using a schema', fullDoc: '' },
+  // Dev.to
+  { type: 'devto_create_article', name: 'Dev.to Create Article', category: 'integration', description: 'Create a new article on Dev.to', fullDoc: '' },
+  { type: 'devto_update_article', name: 'Dev.to Update Article', category: 'integration', description: 'Update an existing article on Dev.to', fullDoc: '' },
+  { type: 'devto_get_articles', name: 'Dev.to Get Articles', category: 'integration', description: 'Get published articles from Dev.to', fullDoc: '' },
+  // WordPress
+  { type: 'wordpress_create_post', name: 'WordPress Create Post', category: 'integration', description: 'Create a new WordPress post', fullDoc: '' },
+  { type: 'wordpress_update_post', name: 'WordPress Update Post', category: 'integration', description: 'Update an existing WordPress post', fullDoc: '' },
+  { type: 'wordpress_get_posts', name: 'WordPress Get Posts', category: 'integration', description: 'Get posts from a WordPress site', fullDoc: '' },
+  { type: 'wordpress_upload_media', name: 'WordPress Upload Media', category: 'integration', description: 'Upload media to a WordPress site', fullDoc: '' },
+  // Google Sheets
+  { type: 'googleSheetsAppend', name: 'Google Sheets Append', category: 'integration', description: 'Append rows to a Google Sheets spreadsheet', fullDoc: '' },
+  { type: 'googleSheetsClear', name: 'Google Sheets Clear', category: 'integration', description: 'Clear a range in a Google Sheets spreadsheet', fullDoc: '' },
+  { type: 'googleSheetsRead', name: 'Google Sheets Read', category: 'integration', description: 'Read data from a Google Sheets spreadsheet', fullDoc: '' },
+  { type: 'googleSheetsUpdate', name: 'Google Sheets Update', category: 'integration', description: 'Update cells in a Google Sheets spreadsheet', fullDoc: '' },
+  // Slack
+  { type: 'slack_send_message', name: 'Slack Send Message', category: 'integration', description: 'Send a message to a Slack channel', fullDoc: '' },
+  { type: 'slack_update_message', name: 'Slack Update Message', category: 'integration', description: 'Update an existing Slack message', fullDoc: '' },
+  { type: 'slack_get_channel_history', name: 'Slack Get Channel History', category: 'integration', description: 'Get message history from a Slack channel', fullDoc: '' },
+  { type: 'slack_search_messages', name: 'Slack Search Messages', category: 'integration', description: 'Search messages across Slack workspace', fullDoc: '' },
+  // AI
   { type: 'social_keyword_generator', name: 'Social Keyword Generator', category: 'action', description: 'Generate platform-specific search keywords from a topic using Claude', fullDoc: '' },
   { type: 'draft_emails', name: 'Draft Emails', category: 'action', description: 'Generate personalized email drafts for contacts using Claude', fullDoc: '' },
   { type: 'social_ai_analyze', name: 'Social AI Analyze', category: 'action', description: 'Analyze social media posts for relevance, sentiment, complaints, and urgency', fullDoc: '' },

@@ -36,7 +36,7 @@ export const TOOLS: Tool[] = [
   },
   {
     name: 'list_nodes',
-    description: 'List all 16 built-in jam-nodes nodes with their type, name, category, and brief description.',
+    description: 'List all built-in jam-nodes nodes with their type, name, category, and brief description.',
     inputSchema: {
       type: 'object',
       properties: {},
@@ -44,7 +44,7 @@ export const TOOLS: Tool[] = [
   },
   {
     name: 'get_api_reference',
-    description: 'Get jam-nodes API reference for a specific area. Areas: "core", "types", "registry", "execution-context", "editor", "workflow-runner", "schema-introspector", "nodes".',
+    description: 'Get jam-nodes API reference for a specific area. Areas: "core", "types", "registry", "execution-context", "nodes".',
     inputSchema: {
       type: 'object',
       properties: {

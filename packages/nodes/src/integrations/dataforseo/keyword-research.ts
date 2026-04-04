@@ -194,7 +194,6 @@ export const seoKeywordResearchNode = defineNode({
           }
         } catch (kwError) {
           // Continue with other keywords on individual failures
-          console.warn(`Error researching keyword "${seedKeyword}":`, kwError);
         }
       }
 
